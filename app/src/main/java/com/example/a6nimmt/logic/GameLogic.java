@@ -28,12 +28,13 @@ public class GameLogic {
     private ArrayList<Card> row4 = new ArrayList<>();
     private ArrayList<Card> allCards = MainActivity.cards;
     private ArrayList<SelectedCard> selectedCards = new ArrayList<>();
+    private final int ROW_LIMIT = 5;
     Random random = new Random();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void initGame() {
 
-        int[] randomIndexes = random.ints(0, 14).distinct().limit(13).toArray();
+        int[] randomIndexes = random.ints(0, 20).distinct().limit(16).toArray();
 
         row1.add(allCards.get(randomIndexes[0]));
         row2.add(allCards.get(randomIndexes[1]));
@@ -48,34 +49,60 @@ public class GameLogic {
         players.get(0).getCards().add(allCards.get(randomIndexes[4]));
         players.get(0).getCards().add(allCards.get(randomIndexes[5]));
         players.get(0).getCards().add(allCards.get(randomIndexes[6]));
-        players.get(1).getCards().add(allCards.get(randomIndexes[7]));
+        players.get(0).getCards().add(allCards.get(randomIndexes[7]));
         players.get(1).getCards().add(allCards.get(randomIndexes[8]));
         players.get(1).getCards().add(allCards.get(randomIndexes[9]));
-        players.get(2).getCards().add(allCards.get(randomIndexes[10]));
-        players.get(2).getCards().add(allCards.get(randomIndexes[11]));
+        players.get(1).getCards().add(allCards.get(randomIndexes[10]));
+        players.get(1).getCards().add(allCards.get(randomIndexes[11]));
         players.get(2).getCards().add(allCards.get(randomIndexes[12]));
+        players.get(2).getCards().add(allCards.get(randomIndexes[13]));
+        players.get(2).getCards().add(allCards.get(randomIndexes[14]));
+        players.get(2).getCards().add(allCards.get(randomIndexes[15]));
+
+        System.out.println("first of the game :");
+        System.out.println("+++ main cards :");
+        for (int i = 0; i < 4; i++) {
+            System.out.println("row " + i + " :");
+            for (Card c :
+                    mainCards.get(i)) {
+                System.out.println(c.getNumber());
+            }
+            System.out.println("***");
+        }
+
+        System.out.println("+++ players cards :");
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println("player " + i + " :");
+            for (Card c :
+                    players.get(i).getCards()) {
+                System.out.println(c.getNumber());
+            }
+            System.out.println("***");
+        }
 
 
     }
 
     public void checkGame() {
 
-//        SelectedCard selectedCard1 = (SelectedCard) players.get(0).getCards().get(0);
-//        selectedCard1.setPlayerNumber(0);
-//        SelectedCard selectedCard2 = (SelectedCard) players.get(1).getCards().get(0);
-//        selectedCard2.setPlayerNumber(1);
-//        SelectedCard selectedCard3 = (SelectedCard) players.get(2).getCards().get(0);
-//        selectedCard3.setPlayerNumber(2);
-//        SelectedCard selectedCard4 = (SelectedCard) players.get(3).getCards().get(0);
-//        selectedCard4.setPlayerNumber(3);
-
+        selectedCards.clear();
         SelectedCard selectedCard1 = new SelectedCard(0, players.get(0).getCards().get(0));
         SelectedCard selectedCard2 = new SelectedCard(1, players.get(1).getCards().get(0));
         SelectedCard selectedCard3 = new SelectedCard(2, players.get(2).getCards().get(0));
+        players.get(0).getCards().remove(0);
+        players.get(1).getCards().remove(0);
+        players.get(2).getCards().remove(0);
+
 
         selectedCards.add(selectedCard1);
         selectedCards.add(selectedCard2);
         selectedCards.add(selectedCard3);
+
+        System.out.println("+++ selected cards :");
+        for (SelectedCard c :
+                selectedCards) {
+            System.out.println(c.getCard().getNumber());
+        }
 
 
         Collections.sort(selectedCards, new Comparator<SelectedCard>() {
@@ -94,17 +121,22 @@ public class GameLogic {
             placeCards(card);
         }
 
-//        for (SelectedCard card:
-//             selectedCards) {
-//            System.out.println(card.getCard().getNumber());
-//        }
+        System.out.println("----------------------");
+        for (int i = 0; i < 4; i++) {
+            System.out.println("row " + i + " :");
+            for (Card c :
+                    mainCards.get(i)) {
+                System.out.println(c.getNumber());
+            }
+            System.out.println("***");
+        }
 
     }
 
     public void placeCards(SelectedCard card) {
 
         int cardNumber = card.getCard().getNumber();
-        HashMap<Integer, Integer> distances = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> distances = new HashMap<>();
 
 
         for (int i = 0; i < 4; i++) {
@@ -123,15 +155,36 @@ public class GameLogic {
             if(iterator.hasNext()){
                 firstKey = iterator.next();
             }
-            mainCards.get(firstKey).add(card.getCard());
+
+
+            int rowLength = mainCards.get(firstKey).size();
+            if (rowLength < ROW_LIMIT) {
+                mainCards.get(firstKey).add(card.getCard());
+            } else {
+                rowIsFull(card, firstKey);
+            }
 
         } else {
-
+            removeRowAndReplaceCard(card);
         }
 
-
-
     }
+
+    public void rowIsFull(SelectedCard card, int rowNumber) {
+        int scores = 0;
+
+        for (Card c :
+                mainCards.get(rowNumber)) {
+                scores += c.getScore();
+        }
+
+        players.get(card.getPlayerNumber()).setScore(players.get(
+                card.getPlayerNumber()).getScore() + scores);
+        mainCards.get(rowNumber).clear();
+        mainCards.get(rowNumber).add(card.getCard());
+    }
+
+
 
     public void removeRowAndReplaceCard(SelectedCard myCard) {
         int minScore = Integer.MAX_VALUE;
@@ -176,5 +229,9 @@ public class GameLogic {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

@@ -95,31 +95,20 @@ public class MainActivity extends AppCompatActivity {
         myCards.add(c3);
         myCards.add(c4);
 
-        for (Card c : myCards) {
-            System.out.println(c.getNumber());
+        GameLogic gameLogic = new GameLogic();
+        gameLogic.initGame();
+        gameLogic.checkGame();
+        gameLogic.checkGame();
+        gameLogic.checkGame();
+        gameLogic.checkGame();
+
+
+        System.out.println("********* scores:");
+        for (Player p :
+                players) {
+            System.out.println(p.getScore());
         }
 
-        System.out.println("-------");
-
-        Collections.sort(myCards, new Comparator<Card>() {
-            @Override
-            public int compare(Card o1, Card o2) {
-                Integer number1 = o1.getNumber();
-                Integer number2 = o2.getNumber();
-                return number1.compareTo(number2);
-            }
-        });
-
-        for (Card c : myCards) {
-            System.out.println(c.getNumber());
-        }
-
-
-
-
-//        GameLogic gameLogic = new GameLogic();
-//        gameLogic.initGame();
-//        gameLogic.checkGame();
 
 
     }
