@@ -18,7 +18,9 @@
     <FrameLayout
         android:id="@+id/no_of_players"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/start"
+        android:layout_centerInParent="true"/>
 
     <Button
         android:id="@+id/exit"
@@ -27,6 +29,6 @@
         android:text="@string/end_game"
         android:onClick="exitButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_below="@id/start"
+        android:layout_below="@id/no_of_players"
         android:layout_centerInParent="true"/>
 </RelativeLayout>
