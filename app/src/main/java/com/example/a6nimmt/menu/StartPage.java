@@ -21,8 +21,6 @@ import static androidx.core.app.ActivityCompat.finishAffinity;
  */
 public class StartPage extends Fragment {
 
-    public static Activity activity;
-
     public StartPage() {
         // Required empty public constructor
     }
@@ -45,4 +43,4 @@ public class StartPage extends Fragment {
             System.exit(0);
         }
     }
-}
+    }
