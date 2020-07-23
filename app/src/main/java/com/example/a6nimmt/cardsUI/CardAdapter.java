@@ -52,15 +52,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Resources res = MainActivity.getAppContext().getResources();
         int resID = res.getIdentifier(cardName , "drawable", MainActivity.getAppContext().getPackageName());
         Bitmap myBitmap=((BitmapDrawable) MainActivity.getAppContext().getResources().getDrawable(resID)).getBitmap();
-        Bitmap imageRounded=Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), myBitmap.getConfig());
-        Canvas canvas=new Canvas(imageRounded);
-        Paint myPaint=new Paint();
-        myPaint.setAntiAlias(true);
-        myPaint.setShader(new BitmapShader(myBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, myBitmap.getWidth(),
-                myBitmap.getHeight())), 100, 100, myPaint); // Round Image Corner 100 100 100 100
+//        Bitmap imageRounded=Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), myBitmap.getConfig());
+//        Canvas canvas=new Canvas(imageRounded);
+//        Paint myPaint=new Paint();
+//        myPaint.setAntiAlias(true);
+//        myPaint.setShader(new BitmapShader(myBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+//        canvas.drawRoundRect((new RectF(0, 0, myBitmap.getWidth(),
+//                myBitmap.getHeight())), 100, 100, myPaint); // Round Image Corner 100 100 100 100
 
-        cardImage.setImageBitmap(imageRounded);
+//        cardImage.setImageBitmap(imageRounded);
+
+        cardImage.setImageBitmap(myBitmap);
 
     }
 

@@ -3,6 +3,7 @@ package com.example.a6nimmt;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         cards.add("card4");
         cards.add("card5");
 
+        ArrayList<String> userCards = new ArrayList<>(cards);
+        userCards.add("card6");
+        userCards.add("card7");
+
+
 
         TextView text1 = findViewById(R.id.textView1);
         text1.setText(R.string.text1);
@@ -66,10 +72,46 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView1 = findViewById(R.id.recyclerView1);
         CardAdapter cardAdapter1 = new CardAdapter(cards);
+        cardAdapter1.setHasStableIds(true);
         recyclerView1.setAdapter(cardAdapter1);
+        recyclerView1.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView1.setLayoutManager(layoutManager);
+
+
+        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
+        recyclerView1.setLayoutManager(layoutManager1);
+
+        RecyclerView recyclerView2 = findViewById(R.id.recyclerView2);
+        CardAdapter cardAdapter2 = new CardAdapter(cards);
+        recyclerView2.setAdapter(cardAdapter2);
+        recyclerView2.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+        recyclerView2.setLayoutManager(layoutManager2);
+
+        RecyclerView recyclerView3 = findViewById(R.id.recyclerView3);
+        CardAdapter cardAdapter3 = new CardAdapter(cards);
+        recyclerView3.setAdapter(cardAdapter3);
+        recyclerView3.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(this);
+        recyclerView3.setLayoutManager(layoutManager3);
+
+        RecyclerView recyclerView4 = findViewById(R.id.recyclerView4);
+        CardAdapter cardAdapter4 = new CardAdapter(cards);
+        recyclerView4.setAdapter(cardAdapter4);
+        recyclerView4.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(this);
+        recyclerView4.setLayoutManager(layoutManager4);
+
+        RecyclerView recyclerView5 = findViewById(R.id.recyclerView5);
+        CardAdapter cardAdapter5 = new CardAdapter(userCards);
+        recyclerView5.setAdapter(cardAdapter5);
+        recyclerView5.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(this);
+        recyclerView5.setLayoutManager(layoutManager5);
 
 
 
