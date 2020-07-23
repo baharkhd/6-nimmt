@@ -3,10 +3,14 @@ package com.example.a6nimmt;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a6nimmt.cardsUI.CardAdapter;
 import com.example.a6nimmt.logic.Card;
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.game_board);
 
         appContext = getApplicationContext();
         dataManager = new DataManager();
@@ -38,6 +42,34 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        ArrayList<String> cards = new ArrayList<>();
+        cards.add("card1");
+        cards.add("card2");
+        cards.add("card3");
+        cards.add("card4");
+        cards.add("card5");
+
+
+        TextView text1 = findViewById(R.id.textView1);
+        text1.setText(R.string.text1);
+
+        TextView text2 = findViewById(R.id.textView2);
+        text2.setText(R.string.text2);
+
+        TextView text3 = findViewById(R.id.textView3);
+        text3.setText(R.string.text3);
+
+        TextView text4 = findViewById(R.id.textView4);
+        text4.setText(R.string.text4);
+
+
+        RecyclerView recyclerView1 = findViewById(R.id.recyclerView1);
+        CardAdapter cardAdapter1 = new CardAdapter(cards);
+        recyclerView1.setAdapter(cardAdapter1);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView1.setLayoutManager(layoutManager);
 
 
 
