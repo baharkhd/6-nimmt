@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,16 @@ import java.util.ArrayList;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
     private ArrayList<String> cardNames;
+    private RecyclerView mRecyclerView;
+
+    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int itemPosition = mRecyclerView.getChildLayoutPosition(view);
+            String item = cardNames.get(itemPosition);
+            MainActivity.addedCards.add(item);
+        }
+    };
 
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
@@ -33,14 +44,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
     }
 
-    public CardAdapter(ArrayList<String> cardNames) {
+    public CardAdapter(ArrayList<String> cardNames, RecyclerView recyclerView) {
         this.cardNames = cardNames;
+        this.mRecyclerView = recyclerView;
     }
 
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        view.setOnClickListener(mOnClickListener);
         return new CardViewHolder(view);
     }
 

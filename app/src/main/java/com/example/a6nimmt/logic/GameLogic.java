@@ -25,7 +25,7 @@ public class GameLogic {
     private ArrayList<Card> row2 = new ArrayList<>();
     private ArrayList<Card> row3 = new ArrayList<>();
     private ArrayList<Card> row4 = new ArrayList<>();
-    private ArrayList<Card> allCards = MainActivity.cards;
+    private ArrayList<Card> allCards = MainActivity.allCards;
     private ArrayList<SelectedCard> selectedCards = new ArrayList<>();
     private final int ROW_LIMIT = 5;
     Random random = new Random();
@@ -59,7 +59,7 @@ public class GameLogic {
         players.get(2).getCards().add(allCards.get(randomIndexes[15]));
 
         System.out.println("first of the game :");
-        System.out.println("+++ main cards :");
+        System.out.println("+++ main allCards :");
         for (int i = 0; i < 4; i++) {
             System.out.println("row " + i + " :");
             for (Card c :
@@ -69,7 +69,7 @@ public class GameLogic {
             System.out.println("***");
         }
 
-        System.out.println("+++ players cards :");
+        System.out.println("+++ players allCards :");
         for (int i = 0; i < players.size(); i++) {
             System.out.println("player " + i + " :");
             for (Card c :
@@ -97,7 +97,7 @@ public class GameLogic {
         selectedCards.add(selectedCard2);
         selectedCards.add(selectedCard3);
 
-        System.out.println("+++ selected cards :");
+        System.out.println("+++ selected allCards :");
         for (SelectedCard c :
                 selectedCards) {
             System.out.println(c.getCard().getNumber());

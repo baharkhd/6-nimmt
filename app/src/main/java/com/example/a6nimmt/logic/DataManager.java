@@ -85,13 +85,13 @@ public class DataManager {
 
         JSONArray cardsArray  = new JSONArray(res);
 
-        MainActivity.cards.clear();
+        MainActivity.allCards.clear();
         int number, score;
         for (int i = 0; i < 104; i++) {
             number = Integer.parseInt(((JSONObject)cardsArray.get(i)).get("number").toString());
             score = Integer.parseInt(((JSONObject)cardsArray.get(i)).get("score").toString());
             Card card = new Card(score, number);
-            MainActivity.cards.add(card);
+            MainActivity.allCards.add(card);
         }
     }
 }
