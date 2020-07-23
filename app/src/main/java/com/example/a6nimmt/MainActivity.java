@@ -54,20 +54,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> userCards = new ArrayList<>(cards);
         userCards.add("card6");
         userCards.add("card7");
-
-
-
-        TextView text1 = findViewById(R.id.textView1);
-        text1.setText(R.string.text1);
-
-        TextView text2 = findViewById(R.id.textView2);
-        text2.setText(R.string.text2);
-
-        TextView text3 = findViewById(R.id.textView3);
-        text3.setText(R.string.text3);
-
-        TextView text4 = findViewById(R.id.textView4);
-        text4.setText(R.string.text4);
+        userCards.add("card8");
+        userCards.add("card9");
+        userCards.add("card10");
 
 
         RecyclerView recyclerView1 = findViewById(R.id.recyclerView1);
