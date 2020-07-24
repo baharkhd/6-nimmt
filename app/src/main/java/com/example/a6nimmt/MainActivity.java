@@ -1,9 +1,12 @@
 package com.example.a6nimmt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a6nimmt.cardsUI.CardAdapter;
+import com.example.a6nimmt.cardsUI.CardAdapter2;
 import com.example.a6nimmt.logic.Card;
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
@@ -24,83 +28,151 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Player> players = new ArrayList<>();
-    public static ArrayList<Card> cards = new ArrayList<>();
-    private static Context appContext;
-    private DataManager dataManager;
+//    public static ArrayList<Card> allCards = new ArrayList<>();
+//    private static Context appContext;
+
+
+    public RecyclerView recyclerView1;
+    public RecyclerView recyclerView5;
+    public CardAdapter2 cardAdapter1;
+    public ArrayList<String> cards = new ArrayList<>(5);
+    public ArrayList<Card> myCards = new ArrayList<>(5);
+    public static ArrayList<String> addedCards = new ArrayList<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_board);
-
-        appContext = getApplicationContext();
-        dataManager = new DataManager();
-        try {
-            dataManager.handleData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<String> cards = new ArrayList<>();
-        cards.add("card1");
-        cards.add("card2");
-        cards.add("card3");
-        cards.add("card4");
-        cards.add("card5");
-
-        ArrayList<String> userCards = new ArrayList<>(cards);
-        userCards.add("card6");
-        userCards.add("card7");
-        userCards.add("card8");
-        userCards.add("card9");
-        userCards.add("card10");
-
-
-        RecyclerView recyclerView1 = findViewById(R.id.recyclerView1);
-        CardAdapter cardAdapter1 = new CardAdapter(cards);
-        cardAdapter1.setHasStableIds(true);
-        recyclerView1.setAdapter(cardAdapter1);
-        recyclerView1.setHasFixedSize(true);
+        setContentView(R.layout.main_layout);
 
 
 
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
-        recyclerView1.setLayoutManager(layoutManager1);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent myIntent = new Intent(MainActivity.this, GameActivity.class);
+                        startActivity(myIntent);
+                    }
+                });
+            }
+        });
 
-        RecyclerView recyclerView2 = findViewById(R.id.recyclerView2);
-        CardAdapter cardAdapter2 = new CardAdapter(cards);
-        recyclerView2.setAdapter(cardAdapter2);
-        recyclerView2.setHasFixedSize(true);
+//        appContext = getApplicationContext();
 
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
-        recyclerView2.setLayoutManager(layoutManager2);
+//        Card card28 = new Card(1, 1);
+//        Card card29 = new Card(1, 2);
+//        Card card31 = new Card(1, 3);
+//        Card card32 = new Card(1, 4);
+//        Card card34 = new Card(1, 5);
+//        Card card36 = new Card(1, 6);
+//        Card card37 = new Card(1, 7);
+//        Card card38 = new Card(1, 8);
+//        Card card39 = new Card(1, 9);
+//        Card card41 = new Card(1, 10);
+//
+//        myCards.add(card28);
+//        myCards.add(card29);
+//        myCards.add(card31);
+//        myCards.add(card32);
+//        myCards.add(card34);
+//
+//        ArrayList<Card> myUserCards = new ArrayList<>(myCards);
+//        myUserCards.add(card36);
+//        myUserCards.add(card37);
+//        myUserCards.add(card38);
+//        myUserCards.add(card39);
+//        myUserCards.add(card41);
+//
+//
+//        recyclerView1 = findViewById(R.id.recyclerView1);
+//        cardAdapter1 = new CardAdapter2(myCards, recyclerView1);
+//        cardAdapter1.setHasStableIds(true);
+//        recyclerView1.setAdapter(cardAdapter1);
+//        recyclerView1.setHasFixedSize(true);
+//
+//
+//        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
+//        recyclerView1.setLayoutManager(layoutManager1);
 
-        RecyclerView recyclerView3 = findViewById(R.id.recyclerView3);
-        CardAdapter cardAdapter3 = new CardAdapter(cards);
-        recyclerView3.setAdapter(cardAdapter3);
-        recyclerView3.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(this);
-        recyclerView3.setLayoutManager(layoutManager3);
 
-        RecyclerView recyclerView4 = findViewById(R.id.recyclerView4);
-        CardAdapter cardAdapter4 = new CardAdapter(cards);
-        recyclerView4.setAdapter(cardAdapter4);
-        recyclerView4.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(this);
-        recyclerView4.setLayoutManager(layoutManager4);
+//        final ArrayList<String> cards = new ArrayList<>(5);
+//        cards.add("card28");
+//        cards.add("card29");
+//        cards.add("card31");
+//        cards.add("card32");
+//        cards.add("card34");
+//
+//        final ArrayList<String> userCards = new ArrayList<>(cards);
+//        userCards.add("card36");
+//        userCards.add("card37");
+//        userCards.add("card38");
+//        userCards.add("card39");
+//        userCards.add("card41");
+//
+//
+//        recyclerView1 = findViewById(R.id.recyclerView1);
+//        cardAdapter1 = new CardAdapter(cards, recyclerView1);
+//        cardAdapter1.setHasStableIds(true);
+//        recyclerView1.setAdapter(cardAdapter1);
+//        recyclerView1.setHasFixedSize(true);
+//
+//
+//        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
+//        recyclerView1.setLayoutManager(layoutManager1);
+//
+//        Button userButton = findViewById(R.id.userButton);
+//        userButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                myCards.remove(0);
+//                cardAdapter1.notifyItemRemoved(0);
+//            }
+//        });
 
-        RecyclerView recyclerView5 = findViewById(R.id.recyclerView5);
-        CardAdapter cardAdapter5 = new CardAdapter(userCards);
-        recyclerView5.setAdapter(cardAdapter5);
-        recyclerView5.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(this);
-        recyclerView5.setLayoutManager(layoutManager5);
+
+//        RecyclerView recyclerView2 = findViewById(R.id.recyclerView2);
+//        CardAdapter cardAdapter2 = new CardAdapter(cards);
+//        recyclerView2.setAdapter(cardAdapter2);
+//        recyclerView2.setHasFixedSize(true);
+//
+//        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+//        recyclerView2.setLayoutManager(layoutManager2);
+//
+//        RecyclerView recyclerView3 = findViewById(R.id.recyclerView3);
+//        CardAdapter cardAdapter3 = new CardAdapter(cards);
+//        recyclerView3.setAdapter(cardAdapter3);
+//        recyclerView3.setHasFixedSize(true);
+//
+//        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(this);
+//        recyclerView3.setLayoutManager(layoutManager3);
+//
+//        RecyclerView recyclerView4 = findViewById(R.id.recyclerView4);
+//        CardAdapter cardAdapter4 = new CardAdapter(cards);
+//        recyclerView4.setAdapter(cardAdapter4);
+//        recyclerView4.setHasFixedSize(true);
+//
+//        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(this);
+//        recyclerView4.setLayoutManager(layoutManager4);
+
+
+
+//
+//        recyclerView5 = findViewById(R.id.recyclerView5);
+//        CardAdapter2 cardAdapter5 = new CardAdapter2(myUserCards, recyclerView5);
+//        recyclerView5.setAdapter(cardAdapter5);
+//        recyclerView5.setHasFixedSize(true);
+//
+//        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(this);
+//        recyclerView5.setLayoutManager(layoutManager5);
 
 
 
@@ -113,16 +185,16 @@ public class MainActivity extends AppCompatActivity {
 //        players.add(player2);
 //        players.add(player3);
 //
-//        Card card1 = new Card(1, 1);
-//        Card card2 = new Card(1, 2);
-//        Card card3 = new Card(1, 3);
-//        Card card4 = new Card(1, 4);
-//        Card card5 = new Card(1, 5);
-//        Card card6 = new Card(1, 6);
-//        Card card7 = new Card(1, 7);
-//        Card card8 = new Card(1, 8);
-//        Card card9 = new Card(1, 9);
-//        Card card10 = new Card(1, 10);
+//        Card card28 = new Card(1, 1);
+//        Card card29 = new Card(1, 2);
+//        Card card31 = new Card(1, 3);
+//        Card card32 = new Card(1, 4);
+//        Card card34 = new Card(1, 5);
+//        Card card36 = new Card(1, 6);
+//        Card card37 = new Card(1, 7);
+//        Card card38 = new Card(1, 8);
+//        Card card39 = new Card(1, 9);
+//        Card card41 = new Card(1, 10);
 //        Card card11 = new Card(1, 11);
 //        Card card12 = new Card(1, 12);
 //        Card card13 = new Card(1, 13);
@@ -134,26 +206,26 @@ public class MainActivity extends AppCompatActivity {
 //        Card card19 = new Card(1, 19);
 //        Card card20 = new Card(1, 20);
 //
-//        cards.add(card1);
-//        cards.add(card2);
-//        cards.add(card3);
-//        cards.add(card4);
-//        cards.add(card5);
-//        cards.add(card6);
-//        cards.add(card7);
-//        cards.add(card8);
-//        cards.add(card9);
-//        cards.add(card10);
-//        cards.add(card11);
-//        cards.add(card12);
-//        cards.add(card13);
-//        cards.add(card14);
-//        cards.add(card15);
-//        cards.add(card16);
-//        cards.add(card17);
-//        cards.add(card18);
-//        cards.add(card19);
-//        cards.add(card20);
+//        allCards.add(card28);
+//        allCards.add(card29);
+//        allCards.add(card31);
+//        allCards.add(card32);
+//        allCards.add(card34);
+//        allCards.add(card36);
+//        allCards.add(card37);
+//        allCards.add(card38);
+//        allCards.add(card39);
+//        allCards.add(card41);
+//        allCards.add(card11);
+//        allCards.add(card12);
+//        allCards.add(card13);
+//        allCards.add(card14);
+//        allCards.add(card15);
+//        allCards.add(card16);
+//        allCards.add(card17);
+//        allCards.add(card18);
+//        allCards.add(card19);
+//        allCards.add(card20);
 //
 //        ArrayList<Card> myCards = new ArrayList<>();
 //        Card c1 = new Card(1, 34);
@@ -174,7 +246,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static Context getAppContext() {
-        return appContext;
-    }
+
+//    public static Context getAppContext() {
+//        return appContext;
+//    }
 }
