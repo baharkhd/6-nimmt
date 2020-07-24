@@ -83,7 +83,7 @@ public class Game {
         mainCards.add(row3);
         mainCards.add(row4);
 
-        row1.add(card28);
+        row1.add(card39);
 //        row1.add(card29);
 //        row1.add(card31);
 //        row1.add(card32);
@@ -93,12 +93,12 @@ public class Game {
 //        row2.add(card31);
 //        row2.add(card32);
 
-        row3.add(card36);
+        row3.add(card38);
 //        row3.add(card29);
 //        row3.add(card31);
 //        row3.add(card32);
 
-        row4.add(card37);
+        row4.add(card28);
 //        row4.add(card29);
 //        row4.add(card31);
 //        row4.add(card32);
@@ -124,6 +124,7 @@ public class Game {
             @Override
             public void onClick(View view) {
                 gameLogic.placeCards(selectedCards);
+                selectedCards.clear();
             }
         });
 

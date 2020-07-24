@@ -199,7 +199,7 @@ public class GameLogic {
 
     }
 
-    public void rowIsFull(SelectedCard card, int rowNumber) {
+    public void rowIsFull(SelectedCard card, final int rowNumber) {
         int scores = 0;
 
         for (Card c :
@@ -207,12 +207,36 @@ public class GameLogic {
             scores += c.getScore();
         }
 
-        //Todo : use Handler to update the score
-        players.get(card.getPlayerNumber()).setScore(players.get(
-                card.getPlayerNumber()).getScore() + scores);
+//        //Todo : use Handler to update the score
+//        players.get(card.getPlayerNumber()).setScore(players.get(
+//                card.getPlayerNumber()).getScore() + scores);
+
+
         //Todo : use Handler to update the row
+        final int arraySize = game.getMainCards().get(rowNumber).size();
         game.getMainCards().get(rowNumber).clear();
         game.getMainCards().get(rowNumber).add(card.getCard());
+
+
+        System.out.println("oyyyyyyyyyyyyyyyyyyyyyyyyyy");
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (rowNumber == 0) {
+                    game.getRow1Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow1Adapter().notifyItemInserted(game.getRow1().size() - 1);
+                } else if (rowNumber == 1) {
+                    game.getRow2Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow2Adapter().notifyItemInserted(game.getRow2().size() - 1);
+                } else if (rowNumber == 2) {
+                    game.getRow3Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow3Adapter().notifyItemInserted(game.getRow3().size() - 1);
+                } else if (rowNumber == 3) {
+                    game.getRow4Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow4Adapter().notifyItemInserted(game.getRow4().size() - 1);
+                }
+            }
+        });
     }
 
 
@@ -233,12 +257,35 @@ public class GameLogic {
             }
         }
 
+        final int rowRemoved = rowToBeRemoved;
+        final int arraySize = game.getMainCards().get(rowToBeRemoved).size();
 
         //Todo : use Handler to update score and the row
         game.getMainCards().get(rowToBeRemoved).clear();
-        players.get(myCard.getPlayerNumber()).setScore(players.get(myCard.getPlayerNumber()).getScore()
-                + minScore);
+//        players.get(myCard.getPlayerNumber()).setScore(players.get(myCard.getPlayerNumber()).getScore()
+//                + minScore);
+
         game.getMainCards().get(rowToBeRemoved).add(myCard.getCard());
+
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (rowRemoved == 0) {
+                    game.getRow1Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow1Adapter().notifyItemInserted(game.getRow1().size() - 1);
+                } else if (rowRemoved == 1) {
+                    game.getRow2Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow2Adapter().notifyItemInserted(game.getRow2().size() - 1);
+                } else if (rowRemoved == 2) {
+                    game.getRow3Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow3Adapter().notifyItemInserted(game.getRow3().size() - 1);
+                } else if (rowRemoved == 3) {
+                    game.getRow4Adapter().notifyItemRangeRemoved(0, arraySize);
+                    game.getRow4Adapter().notifyItemInserted(game.getRow4().size() - 1);
+                }
+            }
+        });
 
 
     }
