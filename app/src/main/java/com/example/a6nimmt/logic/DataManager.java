@@ -1,6 +1,7 @@
 package com.example.a6nimmt.logic;
 
 import com.example.a6nimmt.Game;
+import com.example.a6nimmt.GameActivity;
 import com.example.a6nimmt.MainActivity;
 
 import org.json.JSONArray;
@@ -21,7 +22,7 @@ public class DataManager {
 
 
     public void handleData() throws IOException, JSONException {
-        file = new File(Game.getGameContext().getFilesDir(), fileName);
+        file = new File(GameActivity.getGameContext().getFilesDir(), fileName);
 
         if (file.exists()) {
             readData();
@@ -86,13 +87,13 @@ public class DataManager {
 
         JSONArray cardsArray  = new JSONArray(res);
 
-        MainActivity.allCards.clear();
+        Game.getAllCards().clear();
         int number, score;
         for (int i = 0; i < 104; i++) {
             number = Integer.parseInt(((JSONObject)cardsArray.get(i)).get("number").toString());
             score = Integer.parseInt(((JSONObject)cardsArray.get(i)).get("score").toString());
             Card card = new Card(score, number);
-            MainActivity.allCards.add(card);
+            Game.getAllCards().add(card);
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a6nimmt.Game;
+import com.example.a6nimmt.GameActivity;
 import com.example.a6nimmt.MainActivity;
 import com.example.a6nimmt.R;
 import com.example.a6nimmt.logic.Card;
@@ -57,9 +58,9 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.CardViewHold
         ImageView cardImage = holder.itemView.findViewById(R.id.image);
 
         String cardName = "card" + myCards.get(position).getNumber();
-        Resources res = Game.getGameContext().getResources();
-        int resID = res.getIdentifier(cardName , "drawable", Game.getGameContext().getPackageName());
-        Bitmap myBitmap=((BitmapDrawable) Game.getGameContext().getResources().getDrawable(resID)).getBitmap();
+        Resources res = GameActivity.getGameContext().getResources();
+        int resID = res.getIdentifier(cardName , "drawable", GameActivity.getGameContext().getPackageName());
+        Bitmap myBitmap=((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
 //        Bitmap imageRounded=Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), myBitmap.getConfig());
 //        Canvas canvas=new Canvas(imageRounded);
 //        Paint myPaint=new Paint();
@@ -77,6 +78,11 @@ public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.CardViewHold
     @Override
     public int getItemCount() {
         return myCards.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
 }

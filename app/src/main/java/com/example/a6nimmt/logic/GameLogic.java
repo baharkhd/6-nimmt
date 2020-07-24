@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.a6nimmt.Game;
 import com.example.a6nimmt.MainActivity;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class GameLogic {
     private ArrayList<Card> row2 = new ArrayList<>();
     private ArrayList<Card> row3 = new ArrayList<>();
     private ArrayList<Card> row4 = new ArrayList<>();
-    private ArrayList<Card> allCards = MainActivity.allCards;
+    private ArrayList<Card> allCards = Game.getAllCards();
     private ArrayList<SelectedCard> selectedCards = new ArrayList<>();
     private final int ROW_LIMIT = 5;
     Random random = new Random();
@@ -162,6 +163,7 @@ public class GameLogic {
 
             int rowLength = mainCards.get(firstKey).size();
             if (rowLength < ROW_LIMIT) {
+                //Todo : use Handler to update the row
                 mainCards.get(firstKey).add(card.getCard());
             } else {
                 rowIsFull(card, firstKey);
@@ -181,8 +183,10 @@ public class GameLogic {
                 scores += c.getScore();
         }
 
+        //Todo : use Handler to update the score
         players.get(card.getPlayerNumber()).setScore(players.get(
                 card.getPlayerNumber()).getScore() + scores);
+        //Todo : use Handler to update the row
         mainCards.get(rowNumber).clear();
         mainCards.get(rowNumber).add(card.getCard());
     }
@@ -206,6 +210,8 @@ public class GameLogic {
             }
         }
 
+
+        //Todo : use Handler to update score and the row
         mainCards.get(rowToBeRemoved).clear();
         players.get(myCard.getPlayerNumber()).setScore(players.get(myCard.getPlayerNumber()).getScore()
                 + minScore);
