@@ -3,16 +3,24 @@ package com.example.a6nimmt;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a6nimmt.cardsUI.CardAdapter;
 import com.example.a6nimmt.cardsUI.CardAdapter2;
+import com.example.a6nimmt.cardsUI.RecyclerItemClickListener;
 import com.example.a6nimmt.logic.Card;
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.GameLogic;
+import com.example.a6nimmt.logic.SelectedCard;
 
 import org.json.JSONException;
 
@@ -20,13 +28,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
-//
+    //
 //    private ArrayList<String> row1;
 //    private ArrayList<String> row2;
 //    private ArrayList<String> row3;
 //    private ArrayList<String> row4;
     private DataManager dataManager;
-//    private static Context gameContext;
+    //    private static Context gameContext;
     private GameLogic gameLogic;
     private Activity activity;
 
@@ -50,8 +58,11 @@ public class Game {
     private ArrayList<Card> playerCards = new ArrayList<>();
     private static ArrayList<Card> allCards = new ArrayList<>();
 
+    private static ArrayList<SelectedCard> selectedCards = new ArrayList<>();
+
     public Game(Activity activity) {
         this.activity = activity;
+        this.gameLogic = new GameLogic(this);
     }
 
 
@@ -106,12 +117,18 @@ public class Game {
 
         initRecyclerViews();
 
-//        ArrayList<Card> selectedCards = new ArrayList<>();
-//        selectedCards.add(allCards.get())
+        Button userButton = activity.findViewById(R.id.userButton);
+
+        Handler handler = new Handler();
+        userButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameLogic.placeCards(selectedCards);
+            }
+        });
 
 
     }
-
 
 
 //    @Override
@@ -173,7 +190,6 @@ public class Game {
         row3RecyclerView.setLayoutManager(layoutManager3);
 
 
-
         row4RecyclerView = activity.findViewById(R.id.recyclerView4);
         row4Adapter = new CardAdapter2(row4, row4RecyclerView);
         row4Adapter.setHasStableIds(true);
@@ -196,6 +212,35 @@ public class Game {
         row5RecyclerView.setAdapter(row5Adapter);
         row5RecyclerView.setHasFixedSize(true);
 
+        final Handler handler = new Handler();
+
+        row5RecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(activity.getApplicationContext(), row5RecyclerView
+                        , new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, final int position) {
+                        // do whatever
+                        System.out.println("----------- hellooooooooo " + position);
+                        selectedCards.add(new SelectedCard(0, playerCards.get(position)));
+                        playerCards.remove(position);
+
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                row5Adapter.notifyItemRemoved(position);
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+
 
         RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(activity);
         row5RecyclerView.setLayoutManager(layoutManager5);
@@ -203,5 +248,77 @@ public class Game {
 
     public static ArrayList<Card> getAllCards() {
         return allCards;
+    }
+
+    public static ArrayList<SelectedCard> getSelectedCards() {
+        return selectedCards;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public RecyclerView getRow1RecyclerView() {
+        return row1RecyclerView;
+    }
+
+    public RecyclerView getRow2RecyclerView() {
+        return row2RecyclerView;
+    }
+
+    public RecyclerView getRow3RecyclerView() {
+        return row3RecyclerView;
+    }
+
+    public RecyclerView getRow4RecyclerView() {
+        return row4RecyclerView;
+    }
+
+    public RecyclerView getRow5RecyclerView() {
+        return row5RecyclerView;
+    }
+
+    public CardAdapter2 getRow1Adapter() {
+        return row1Adapter;
+    }
+
+    public CardAdapter2 getRow2Adapter() {
+        return row2Adapter;
+    }
+
+    public CardAdapter2 getRow3Adapter() {
+        return row3Adapter;
+    }
+
+    public CardAdapter2 getRow4Adapter() {
+        return row4Adapter;
+    }
+
+    public CardAdapter2 getRow5Adapter() {
+        return row5Adapter;
+    }
+
+    public ArrayList<ArrayList<Card>> getMainCards() {
+        return mainCards;
+    }
+
+    public ArrayList<Card> getRow1() {
+        return row1;
+    }
+
+    public ArrayList<Card> getRow2() {
+        return row2;
+    }
+
+    public ArrayList<Card> getRow3() {
+        return row3;
+    }
+
+    public ArrayList<Card> getRow4() {
+        return row4;
+    }
+
+    public ArrayList<Card> getPlayerCards() {
+        return playerCards;
     }
 }

@@ -17,7 +17,7 @@ public class GameActivity extends Activity {
 
     private Game game;
     private DataManager dataManager;
-    private GameLogic gameLogic;
+//    private GameLogic gameLogic;
     private static Context gameContext;
 
     @Override
@@ -26,8 +26,8 @@ public class GameActivity extends Activity {
         setContentView(R.layout.game_board);
 
         gameContext = getApplicationContext();
+//        gameLogic = new GameLogic();
         game = new Game(this);
-        gameLogic = new GameLogic();
 
         dataManager = new DataManager();
         try {
@@ -51,9 +51,9 @@ public class GameActivity extends Activity {
         return dataManager;
     }
 
-    public GameLogic getGameLogic() {
-        return gameLogic;
-    }
+//    public GameLogic getGameLogic() {
+//        return gameLogic;
+//    }
 
     public static Context getGameContext() {
         return gameContext;
