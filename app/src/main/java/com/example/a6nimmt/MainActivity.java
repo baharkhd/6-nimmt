@@ -28,16 +28,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Player> players = new ArrayList<>();
-//    public static ArrayList<Card> allCards = new ArrayList<>();
-//    private static Context appContext;
-
-
-    public RecyclerView recyclerView1;
-    public RecyclerView recyclerView5;
-    public CardAdapter2 cardAdapter1;
-    public ArrayList<String> cards = new ArrayList<>(5);
-    public ArrayList<Card> myCards = new ArrayList<>(5);
-    public static ArrayList<String> addedCards = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
