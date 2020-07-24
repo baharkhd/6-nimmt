@@ -77,13 +77,14 @@ public class Game {
         Card card38 = new Card(1, 38);
         Card card39 = new Card(1, 39);
         Card card41 = new Card(1, 41);
+        Card card43 = new Card(1, 43);
 
         mainCards.add(row1);
         mainCards.add(row2);
         mainCards.add(row3);
         mainCards.add(row4);
 
-        row1.add(card39);
+        row1.add(card38);
 //        row1.add(card29);
 //        row1.add(card31);
 //        row1.add(card32);
@@ -93,7 +94,7 @@ public class Game {
 //        row2.add(card31);
 //        row2.add(card32);
 
-        row3.add(card38);
+        row3.add(card36);
 //        row3.add(card29);
 //        row3.add(card31);
 //        row3.add(card32);
@@ -113,7 +114,7 @@ public class Game {
         playerCards.add(card37);
         playerCards.add(card38);
         playerCards.add(card39);
-        playerCards.add(card41);
+        playerCards.add(card43);
 
         initRecyclerViews();
 
