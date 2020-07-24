@@ -1,5 +1,6 @@
 package com.example.a6nimmt.logic;
 
+import com.example.a6nimmt.Game;
 import com.example.a6nimmt.MainActivity;
 
 import org.json.JSONArray;
@@ -20,7 +21,7 @@ public class DataManager {
 
 
     public void handleData() throws IOException, JSONException {
-        file = new File(MainActivity.getAppContext().getFilesDir(), fileName);
+        file = new File(Game.getGameContext().getFilesDir(), fileName);
 
         if (file.exists()) {
             readData();

@@ -116,9 +116,7 @@ public class GameLogic {
 
 
 
-        for (SelectedCard card: selectedCards) {
-            placeCards(card);
-        }
+        placeCards(selectedCards);
 
         System.out.println("----------------------");
         for (int i = 0; i < 4; i++) {
@@ -132,7 +130,13 @@ public class GameLogic {
 
     }
 
-    public void placeCards(SelectedCard card) {
+    public void placeCards(ArrayList<SelectedCard> cards) {
+        for (SelectedCard card: cards) {
+            placeCard(card);
+        }
+    }
+
+    public void placeCard(SelectedCard card) {
 
         int cardNumber = card.getCard().getNumber();
         HashMap<Integer, Integer> distances = new HashMap<>();

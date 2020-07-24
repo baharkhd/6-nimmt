@@ -1,17 +1,11 @@
 package com.example.a6nimmt.cardsUI;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,46 +17,46 @@ import com.example.a6nimmt.logic.Card;
 
 import java.util.ArrayList;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+public class CardAdapter2 extends RecyclerView.Adapter<CardAdapter2.CardViewHolder2> {
 
-    private ArrayList<String> cardNames;
+    private ArrayList<Card> myCards;
     private RecyclerView mRecyclerView;
 
 //    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
 //        @Override
 //        public void onClick(View view) {
 //            int itemPosition = mRecyclerView.getChildLayoutPosition(view);
-//            String item = cardNames.get(itemPosition);
+//            String item = myCards.get(itemPosition);
 //            MainActivity.addedCards.add(item);
 //        }
 //    };
 
 
-    public class CardViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewHolder2 extends RecyclerView.ViewHolder {
 
-        public CardViewHolder(@NonNull View itemView) {
+        public CardViewHolder2(@NonNull View itemView) {
             super(itemView);
         }
     }
 
-    public CardAdapter(ArrayList<String> cardNames, RecyclerView recyclerView) {
-        this.cardNames = cardNames;
+    public CardAdapter2(ArrayList<Card> myCards, RecyclerView recyclerView) {
+        this.myCards = myCards;
         this.mRecyclerView = recyclerView;
     }
 
     @NonNull
     @Override
-    public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CardViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
 //        view.setOnClickListener(mOnClickListener);
-        return new CardViewHolder(view);
+        return new CardViewHolder2(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder2 holder, int position) {
         ImageView cardImage = holder.itemView.findViewById(R.id.image);
 
-        String cardName = cardNames.get(position);
+        String cardName = "card" + myCards.get(position).getNumber();
         Resources res = Game.getGameContext().getResources();
         int resID = res.getIdentifier(cardName , "drawable", Game.getGameContext().getPackageName());
         Bitmap myBitmap=((BitmapDrawable) Game.getGameContext().getResources().getDrawable(resID)).getBitmap();
@@ -82,7 +76,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public int getItemCount() {
-        return cardNames.size();
+        return myCards.size();
     }
 
 }
