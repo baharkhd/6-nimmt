@@ -53,6 +53,11 @@ public class GameActivity extends Activity {
         }
 
         game.gameInit();
+        username.setText(current.getName());
+        score.setText(String.valueOf(current.getScore()));
+        CardAdapter2 adapter2 = new CardAdapter2(current.getCards() , game.getRow5RecyclerView());
+        game.getRow5RecyclerView().setAdapter(adapter2);
+        counter++;
 
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +73,12 @@ public class GameActivity extends Activity {
                 username.setText(current.getName());
                 score.setText(String.valueOf(current.getScore()));
                 CardAdapter2 adapter2 = new CardAdapter2(current.getCards() , game.getRow5RecyclerView());
-                game.getRow4RecyclerView().setAdapter(adapter2);
+                game.getRow5RecyclerView().setAdapter(adapter2);
+
             }
         });
+
+
 
 
     }
