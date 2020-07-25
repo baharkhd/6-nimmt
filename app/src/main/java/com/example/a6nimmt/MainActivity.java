@@ -21,6 +21,7 @@ import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,28 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button button = findViewById(R.id.button);
+        Player player1 = new Player("Amir" , 10);
+        Player player2 = new Player("aida" , 20);
+        Player player3 = new Player("Amirre`" , 30);
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        Card card28 = new Card(1, 1);
+        Card card29 = new Card(1, 2);
+        Card card31 = new Card(1, 3);
+        Card card32 = new Card(1, 4);
+        Card card34 = new Card(1, 5);
+        Card card36 = new Card(1, 6);
+        Card card37 = new Card(1, 7);
+        Card card38 = new Card(1, 8);
+        Card card39 = new Card(1, 9);
+        Card card41 = new Card(1, 10);
+        player1.getCards().add(card28);
+        player1.getCards().add(card29);
+        player2.getCards().add(card31);
+        player2.getCards().add(card32);
+        player2.getCards().add(card34);
+        player3.getCards().add(card36);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        appContext = getApplicationContext();
+
+
 
 //        Card card28 = new Card(1, 1);
 //        Card card29 = new Card(1, 2);
