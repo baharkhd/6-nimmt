@@ -118,16 +118,16 @@ public class Game {
 
         initRecyclerViews();
 
-        Button userButton = activity.findViewById(R.id.userButton);
+//        Button userButton = activity.findViewById(R.id.userButton);
 
         Handler handler = new Handler();
-        userButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gameLogic.placeCards(selectedCards);
-                selectedCards.clear();
-            }
-        });
+//        userButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                gameLogic.placeCards(selectedCards);
+//                selectedCards.clear();
+//            }
+//        });
 
 
     }
@@ -322,5 +322,9 @@ public class Game {
 
     public ArrayList<Card> getPlayerCards() {
         return playerCards;
+    }
+
+    public void setPlayerCards(ArrayList<Card> playerCards) {
+        this.playerCards = playerCards;
     }
 }
