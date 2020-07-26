@@ -1,28 +1,17 @@
 package com.example.a6nimmt;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a6nimmt.cardsUI.CardAdapter;
-import com.example.a6nimmt.cardsUI.CardAdapter2;
-import com.example.a6nimmt.logic.Card;
-import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
