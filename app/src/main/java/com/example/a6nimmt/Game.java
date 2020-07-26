@@ -213,6 +213,7 @@ public class Game {
                         System.out.println("----------- hellooooooooo " + position);
                         selectedCards.add(new SelectedCard(0, playerCards.get(position)));
                         playerCards.remove(position);
+                        current.getCards().remove(position);
 
                         handler.post(new Runnable() {
                             @Override
