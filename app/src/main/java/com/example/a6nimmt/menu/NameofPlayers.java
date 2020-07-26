@@ -7,10 +7,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.a6nimmt.R;
@@ -39,23 +42,32 @@ public class NameofPlayers extends Fragment {
         if (getArguments() != null) {
             noOfPlayers = Integer.parseInt(getArguments().getString(ARG_PARAM1));
         }
-//        editTexts = new EditText[noOfPlayers];
-//        RelativeLayout relativeLayout = getView().findViewById(R.id.nameof_players_layout);
-//        for(int i = 0; i < noOfPlayers; i++){
-//            EditText e = new EditText(getContext());
-//            e.setHint(R.string.name_of_player);
-//            e.setId(i);
-//            e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
-//            relativeLayout.addView(e);
-//            editTexts[i] = e;
-//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nameof_players, container, false);
+        editTexts = new EditText[noOfPlayers];
+        LinearLayout linearLayout = new LinearLayout(getContext());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        linearLayout.setLayoutParams(params);
+        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        for(int i = 0; i < noOfPlayers; i++){
+            EditText e = new EditText(getContext());
+            e.setHint(R.string.name_of_player);
+            e.setId(i);
+            e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(e);
+            editTexts[i] = e;
+        }
+        Button ok = new Button(getContext());
+        ok.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        ok.setText(R.string.ok);
+        linearLayout.addView(ok);
+        return linearLayout;
     }
 }
