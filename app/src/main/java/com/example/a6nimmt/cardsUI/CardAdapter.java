@@ -1,24 +1,16 @@
 package com.example.a6nimmt.cardsUI;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a6nimmt.Game;
 import com.example.a6nimmt.GameActivity;
-import com.example.a6nimmt.MainActivity;
 import com.example.a6nimmt.R;
 import com.example.a6nimmt.logic.Card;
 
@@ -26,18 +18,8 @@ import java.util.ArrayList;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-    private ArrayList<String> cardNames;
-    private RecyclerView mRecyclerView;
-
-//    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            int itemPosition = mRecyclerView.getChildLayoutPosition(view);
-//            String item = cardNames.get(itemPosition);
-//            MainActivity.addedCards.add(item);
-//        }
-//    };
-
+    private ArrayList<Card> myCards;
+//    private RecyclerView mRecyclerView;
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
 
@@ -46,9 +28,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
     }
 
-    public CardAdapter(ArrayList<String> cardNames, RecyclerView recyclerView) {
-        this.cardNames = cardNames;
-        this.mRecyclerView = recyclerView;
+    public CardAdapter(ArrayList<Card> myCards) {
+        this.myCards = myCards;
     }
 
     @NonNull
@@ -63,7 +44,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         ImageView cardImage = holder.itemView.findViewById(R.id.image);
 
-        String cardName = cardNames.get(position);
+        String cardName;
+        if (myCards.get(position).getNumber() == 0) {
+            cardName = "card_back";
+        } else {
+            cardName = "card" + myCards.get(position).getNumber();
+        }
         Resources res = GameActivity.getGameContext().getResources();
         int resID = res.getIdentifier(cardName , "drawable", GameActivity.getGameContext().getPackageName());
         Bitmap myBitmap=((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
@@ -83,7 +69,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public int getItemCount() {
-        return cardNames.size();
+        return myCards.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
 }

@@ -39,57 +39,33 @@ public class GameLogic {
         this.handler = new Handler();
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.N)
-//    public void initGame() {
-//
-//        int[] randomIndexes = random.ints(0, 20).distinct().limit(16).toArray();
-//
-//        row1.add(allCards.get(randomIndexes[0]));
-//        row2.add(allCards.get(randomIndexes[1]));
-//        row3.add(allCards.get(randomIndexes[2]));
-//        row4.add(allCards.get(randomIndexes[3]));
-//        mainCards.add(row1);
-//        mainCards.add(row2);
-//        mainCards.add(row3);
-//        mainCards.add(row4);
-//
-//
-//        players.get(0).getCards().add(allCards.get(randomIndexes[4]));
-//        players.get(0).getCards().add(allCards.get(randomIndexes[5]));
-//        players.get(0).getCards().add(allCards.get(randomIndexes[6]));
-//        players.get(0).getCards().add(allCards.get(randomIndexes[7]));
-//        players.get(1).getCards().add(allCards.get(randomIndexes[8]));
-//        players.get(1).getCards().add(allCards.get(randomIndexes[9]));
-//        players.get(1).getCards().add(allCards.get(randomIndexes[10]));
-//        players.get(1).getCards().add(allCards.get(randomIndexes[11]));
-//        players.get(2).getCards().add(allCards.get(randomIndexes[12]));
-//        players.get(2).getCards().add(allCards.get(randomIndexes[13]));
-//        players.get(2).getCards().add(allCards.get(randomIndexes[14]));
-//        players.get(2).getCards().add(allCards.get(randomIndexes[15]));
-//
-//        System.out.println("first of the game :");
-//        System.out.println("+++ main allCards :");
-//        for (int i = 0; i < 4; i++) {
-//            System.out.println("row " + i + " :");
-//            for (Card c :
-//                    mainCards.get(i)) {
-//                System.out.println(c.getNumber());
-//            }
-//            System.out.println("***");
-//        }
-//
-//        System.out.println("+++ players allCards :");
-//        for (int i = 0; i < players.size(); i++) {
-//            System.out.println("player " + i + " :");
-//            for (Card c :
-//                    players.get(i).getCards()) {
-//                System.out.println(c.getNumber());
-//            }
-//            System.out.println("***");
-//        }
-//
-//
-//    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void initGame() {
+
+
+        int initCardNumber = 4 + MainActivity.players.size() * 10;
+
+        int[] randomIndexes = random.ints(0, 104).distinct().limit(initCardNumber).toArray();
+
+        game.getRow1().add(Game.getAllCards().get(randomIndexes[0]));
+        game.getRow2().add(Game.getAllCards().get(randomIndexes[1]));
+        game.getRow3().add(Game.getAllCards().get(randomIndexes[2]));
+        game.getRow4().add(Game.getAllCards().get(randomIndexes[3]));
+        game.getMainCards().add(game.getRow1());
+        game.getMainCards().add(game.getRow2());
+        game.getMainCards().add(game.getRow3());
+        game.getMainCards().add(game.getRow4());
+
+        int cardIndex = 4;
+
+        for (Player player :
+                MainActivity.players) {
+            for (int i = 0; i < 10; i++) {
+                player.getCards().add(Game.getAllCards().get(randomIndexes[cardIndex]));
+                cardIndex++;
+            }
+        }
+    }
 
 //    public void checkGame() {
 //

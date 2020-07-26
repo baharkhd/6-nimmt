@@ -1,39 +1,27 @@
 package com.example.a6nimmt;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
+import android.os.Build;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a6nimmt.cardsUI.CardAdapter;
-import com.example.a6nimmt.cardsUI.CardAdapter2;
 import com.example.a6nimmt.cardsUI.RecyclerItemClickListener;
 import com.example.a6nimmt.logic.Card;
-import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.GameLogic;
+import com.example.a6nimmt.logic.Player;
 import com.example.a6nimmt.logic.SelectedCard;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
-    //
-//    private ArrayList<String> row1;
-//    private ArrayList<String> row2;
-//    private ArrayList<String> row3;
-//    private ArrayList<String> row4;
-    private DataManager dataManager;
+
     //    private static Context gameContext;
     private GameLogic gameLogic;
     private Activity activity;
@@ -44,11 +32,11 @@ public class Game {
     private RecyclerView row4RecyclerView;
     private RecyclerView row5RecyclerView;
 
-    private CardAdapter2 row1Adapter;
-    private CardAdapter2 row2Adapter;
-    private CardAdapter2 row3Adapter;
-    private CardAdapter2 row4Adapter;
-    private CardAdapter2 row5Adapter;
+    private CardAdapter row1Adapter;
+    private CardAdapter row2Adapter;
+    private CardAdapter row3Adapter;
+    private CardAdapter row4Adapter;
+    private CardAdapter row5Adapter;
 
     private ArrayList<ArrayList<Card>> mainCards = new ArrayList<ArrayList<Card>>(4);
     private ArrayList<Card> row1 = new ArrayList<>();
@@ -60,74 +48,76 @@ public class Game {
 
     private static ArrayList<SelectedCard> selectedCards = new ArrayList<>();
 
+    private Player current;
+    private int counter = 0 ;
+
     public Game(Activity activity) {
         this.activity = activity;
         this.gameLogic = new GameLogic(this);
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void gameInit() {
-        Card card28 = new Card(1, 28);
-        Card card29 = new Card(1, 29);
-        Card card31 = new Card(1, 31);
-        Card card32 = new Card(1, 32);
-        Card card34 = new Card(1, 34);
-        Card card36 = new Card(1, 36);
-        Card card37 = new Card(1, 37);
-        Card card38 = new Card(1, 38);
-        Card card39 = new Card(1, 39);
-        Card card41 = new Card(1, 41);
-        Card card43 = new Card(1, 43);
 
-        mainCards.add(row1);
-        mainCards.add(row2);
-        mainCards.add(row3);
-        mainCards.add(row4);
+        gameLogic.initGame();
 
-        row1.add(card38);
-//        row1.add(card29);
-//        row1.add(card31);
-//        row1.add(card32);
-
-        row2.add(card41);
-//        row2.add(card29);
-//        row2.add(card31);
-//        row2.add(card32);
-
-        row3.add(card36);
-//        row3.add(card29);
-//        row3.add(card31);
-//        row3.add(card32);
-
-        row4.add(card28);
-//        row4.add(card29);
-//        row4.add(card31);
-//        row4.add(card32);
-
-        playerCards.clear();
-        playerCards.add(card28);
-        playerCards.add(card29);
-        playerCards.add(card31);
-        playerCards.add(card32);
-        playerCards.add(card34);
-        playerCards.add(card36);
-        playerCards.add(card37);
-        playerCards.add(card38);
-        playerCards.add(card39);
-        playerCards.add(card43);
 
         initRecyclerViews();
 
-//        Button userButton = activity.findViewById(R.id.userButton);
+        final Handler handler = new Handler();
 
-        Handler handler = new Handler();
-//        userButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                gameLogic.placeCards(selectedCards);
-//                selectedCards.clear();
-//            }
-//        });
+        Button userBtn = activity.findViewById(R.id.userButton);
+        final TextView score = activity.findViewById(R.id.score);
+        final TextView username = activity.findViewById(R.id.username);
+
+        username.setText("??");
+        score.setText("??");
+
+
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int arraySize = playerCards.size();
+                String currentPlayerName = "??";
+                String currentPlayerScore = "??";
+
+                if (counter == MainActivity.players.size()) {
+                    counter = 0;
+                    playerCards.clear();
+                    playerCards.add(new Card(0, 0));
+
+                }
+
+                else {
+                    current = MainActivity.players.get(counter);
+                    playerCards.clear();
+                    playerCards.addAll(current.getCards());
+
+                    counter++;
+                    currentPlayerName = current.getName();
+                    currentPlayerScore = current.getScore().toString();
+                }
+
+                final String name = currentPlayerName;
+                final String curScore = currentPlayerScore;
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        username.setText(name);
+                        score.setText(curScore);
+
+
+                        row5Adapter.notifyItemRangeRemoved(0, arraySize);
+                        row5Adapter.notifyItemInserted(playerCards.size() - 1);
+                    }
+                });
+
+            }
+        });
+
+
 
 
     }
@@ -145,7 +135,7 @@ public class Game {
 
     public void initRecyclerViews() {
         row1RecyclerView = activity.findViewById(R.id.recyclerView1);
-        row1Adapter = new CardAdapter2(row1, row1RecyclerView);
+        row1Adapter = new CardAdapter(row1);
         row1Adapter.setHasStableIds(true);
         row1RecyclerView.setAdapter(row1Adapter);
         row1RecyclerView.setHasFixedSize(true);
@@ -161,7 +151,7 @@ public class Game {
 
 
         row2RecyclerView = activity.findViewById(R.id.recyclerView2);
-        row2Adapter = new CardAdapter2(row2, row2RecyclerView);
+        row2Adapter = new CardAdapter(row2);
         row2Adapter.setHasStableIds(true);
         row2RecyclerView.setAdapter(row2Adapter);
         row2RecyclerView.setHasFixedSize(true);
@@ -177,7 +167,7 @@ public class Game {
 
 
         row3RecyclerView = activity.findViewById(R.id.recyclerView3);
-        row3Adapter = new CardAdapter2(row3, row3RecyclerView);
+        row3Adapter = new CardAdapter(row3);
         row3Adapter.setHasStableIds(true);
         row3RecyclerView.setAdapter(row3Adapter);
         row3RecyclerView.setHasFixedSize(true);
@@ -193,7 +183,7 @@ public class Game {
 
 
         row4RecyclerView = activity.findViewById(R.id.recyclerView4);
-        row4Adapter = new CardAdapter2(row4, row4RecyclerView);
+        row4Adapter = new CardAdapter(row4);
         row4Adapter.setHasStableIds(true);
         row4RecyclerView.setAdapter(row4Adapter);
         row4RecyclerView.setHasFixedSize(true);
@@ -209,7 +199,7 @@ public class Game {
 
 
         row5RecyclerView = activity.findViewById(R.id.recyclerView5);
-        row5Adapter = new CardAdapter2(playerCards, row5RecyclerView);
+        row5Adapter = new CardAdapter(playerCards);
         row5Adapter.setHasStableIds(true);
         row5RecyclerView.setAdapter(row5Adapter);
         row5RecyclerView.setHasFixedSize(true);
@@ -280,23 +270,23 @@ public class Game {
         return row5RecyclerView;
     }
 
-    public CardAdapter2 getRow1Adapter() {
+    public CardAdapter getRow1Adapter() {
         return row1Adapter;
     }
 
-    public CardAdapter2 getRow2Adapter() {
+    public CardAdapter getRow2Adapter() {
         return row2Adapter;
     }
 
-    public CardAdapter2 getRow3Adapter() {
+    public CardAdapter getRow3Adapter() {
         return row3Adapter;
     }
 
-    public CardAdapter2 getRow4Adapter() {
+    public CardAdapter getRow4Adapter() {
         return row4Adapter;
     }
 
-    public CardAdapter2 getRow5Adapter() {
+    public CardAdapter getRow5Adapter() {
         return row5Adapter;
     }
 
