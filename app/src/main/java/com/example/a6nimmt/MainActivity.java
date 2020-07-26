@@ -10,15 +10,9 @@ import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a6nimmt.logic.Card;
 import com.example.a6nimmt.logic.Player;
 
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
-
-    public static ArrayList<Player> players = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -33,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Player player1 = new Player("Amir", 0);
         Player player2 = new Player("aida", 0);
         Player player3 = new Player("Amirre`", 0);
-        players.add(player1);
-        players.add(player2);
-        players.add(player3);
+        GameActivity.players.add(player1);
+        GameActivity.players.add(player2);
+        GameActivity.players.add(player3);
 
 
         button.setOnClickListener(new View.OnClickListener() {

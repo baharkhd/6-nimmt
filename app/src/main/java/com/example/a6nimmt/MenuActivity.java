@@ -2,6 +2,7 @@ package com.example.a6nimmt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -74,5 +75,9 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     public void onNamesEntered(String[] names) {
         //todo: transition to game activity
         Toast.makeText(this, "names entered", Toast.LENGTH_SHORT).show();
+
+        Intent myIntent = new Intent(this, GameActivity.class);
+        myIntent.putExtra("playerNames", names);
+        startActivity(myIntent);
     }
 }

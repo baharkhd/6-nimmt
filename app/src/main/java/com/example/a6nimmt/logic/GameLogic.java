@@ -6,7 +6,7 @@ import android.os.Handler;
 import androidx.annotation.RequiresApi;
 
 import com.example.a6nimmt.Game;
-import com.example.a6nimmt.MainActivity;
+import com.example.a6nimmt.GameActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class GameLogic {
 
-    private ArrayList<Player> players = MainActivity.players;
+    private ArrayList<Player> players = GameActivity.players;
     private Game game;
     private Handler handler;
     private final int ROW_LIMIT = 5;
@@ -36,7 +36,7 @@ public class GameLogic {
     public void initGame() {
 
 
-        int initCardNumber = 4 + MainActivity.players.size() * 10;
+        int initCardNumber = 4 + GameActivity.players.size() * 10;
 
         int[] randomIndexes = random.ints(0, 104).distinct().limit(initCardNumber).toArray();
 
@@ -52,7 +52,7 @@ public class GameLogic {
         int cardIndex = 4;
 
         for (Player player :
-                MainActivity.players) {
+                GameActivity.players) {
             for (int i = 0; i < 10; i++) {
                 player.getCards().add(Game.getAllCards().get(randomIndexes[cardIndex]));
                 cardIndex++;

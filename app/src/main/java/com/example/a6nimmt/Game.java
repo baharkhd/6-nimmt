@@ -99,7 +99,7 @@ public class Game {
         String currentPlayerScore = "??";
         canSelectCard = true;
 
-        if (counter == MainActivity.players.size()) {
+        if (counter == GameActivity.players.size()) {
             counter = 0;
             playerCards.clear();
             playerCards.add(backOfCard);
@@ -107,7 +107,7 @@ public class Game {
             selectedCards.clear();
 
         } else {
-            current = MainActivity.players.get(counter);
+            current = GameActivity.players.get(counter);
             playerCards.clear();
             playerCards.addAll(current.getCards());
 

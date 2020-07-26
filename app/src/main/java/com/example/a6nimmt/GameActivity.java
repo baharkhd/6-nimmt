@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
+    public static ArrayList<Player> players = new ArrayList<>();
     private Game game;
     private DataManager dataManager;
     private static Context gameContext;
@@ -33,6 +34,14 @@ public class GameActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_board);
+
+        Bundle extras = getIntent().getExtras();
+        String[] names = extras.getStringArray("playerNames");
+
+        for (String name :
+                names) {
+            players.add(new Player(name, 0));
+        }
 
         gameContext = getApplicationContext();
         game = new Game(this);
