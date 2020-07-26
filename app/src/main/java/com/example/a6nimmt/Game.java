@@ -44,6 +44,7 @@ public class Game {
     private ArrayList<Card> row4 = new ArrayList<>();
     private ArrayList<Card> playerCards = new ArrayList<>();
     private static ArrayList<Card> allCards = new ArrayList<>();
+    private boolean canSelectCard = true;
 
     private Card backOfCard;
 
@@ -96,6 +97,7 @@ public class Game {
         final int arraySize = playerCards.size();
         String currentPlayerName = "??";
         String currentPlayerScore = "??";
+        canSelectCard = true;
 
         if (counter == MainActivity.players.size()) {
             counter = 0;
@@ -209,19 +211,20 @@ public class Game {
                         , new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, final int position) {
-                        // do whatever
-                        System.out.println("----------- hellooooooooo " + position);
-                        selectedCards.add(new SelectedCard(0, playerCards.get(position)));
-                        playerCards.remove(position);
-                        current.getCards().remove(position);
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                row5Adapter.notifyItemRemoved(position);
-                            }
-                        });
+                        if (counter != 0 && canSelectCard) {
+                            selectedCards.add(new SelectedCard(counter - 1 , playerCards.get(position)));
+                            playerCards.remove(position);
+                            current.getCards().remove(position);
+                            canSelectCard = false;
 
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    row5Adapter.notifyItemRemoved(position);
+                                }
+                            });
+                        }
 
                     }
 
