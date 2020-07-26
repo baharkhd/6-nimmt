@@ -9,14 +9,14 @@
         android:id="@+id/numberInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:hint="@string/noofplayers" />
+        android:hint="@string/noofplayers"
+        android:inputType="numberDecimal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ok"
         android:onClick="numberOfPlayers"
+        android:text="@string/ok"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         tools:ignore="OnClick" />
 </LinearLayout>

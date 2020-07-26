@@ -2,11 +2,11 @@ package com.example.a6nimmt.menu;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.a6nimmt.R;
 
 public class NameofPlayers extends Fragment {
     EditText[] editTexts;
+    String[] names;
+    private OnNamesListener mListener;
     private static final String ARG_PARAM1 = "param1";
     private int noOfPlayers;
 
@@ -48,16 +50,16 @@ public class NameofPlayers extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         editTexts = new EditText[noOfPlayers];
+        names = new String[noOfPlayers];
         LinearLayout linearLayout = new LinearLayout(getContext());
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayout.setLayoutParams(params);
         linearLayout.setGravity(Gravity.CENTER);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        for(int i = 0; i < noOfPlayers; i++){
+        for (int i = 0; i < noOfPlayers; i++) {
             EditText e = new EditText(getContext());
             e.setHint(R.string.name_of_player);
-            e.setId(i);
             e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(e);
@@ -68,6 +70,58 @@ public class NameofPlayers extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         ok.setText(R.string.ok);
         linearLayout.addView(ok);
+        getNames(ok);
         return linearLayout;
+    }
+
+    private void getNames(Button ok) {
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean entered_correctly = true;
+                for (int i = 0; i < noOfPlayers; i++) {
+                    String s = String.valueOf(editTexts[i].getText());
+                    if (s.isEmpty() || !entered_correctly) {
+                        entered_correctly = false;
+                        break;
+                    }
+                    for (int j = 0; j < i; j++) {
+                        System.out.println(names[i]);
+                        if (names[j].equals(s)) {
+                            entered_correctly = false;
+                            break;
+                        }
+                    }
+                    names[i] = s;
+                }
+                if (entered_correctly) {
+                    if (mListener != null) {
+                        mListener.onNamesEntered(names);
+                    }
+                } else {
+                    Toast.makeText(getContext(), R.string.enter_names, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof NameofPlayers.OnNamesListener) {
+            mListener = (NameofPlayers.OnNamesListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnNamesListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnNamesListener {
+        void onNamesEntered(String[] names);
     }
 }

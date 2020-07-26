@@ -1,8 +1,5 @@
 package com.example.a6nimmt.menu;
 
-import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -43,4 +40,4 @@ public class StartPage extends Fragment {
             System.exit(0);
         }
     }
-    }
+}

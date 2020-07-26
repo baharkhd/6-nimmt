@@ -12,7 +12,7 @@ import com.example.a6nimmt.menu.NoofPlayers;
 import com.example.a6nimmt.menu.StartPage;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnNamesListener {
 
     StartPage startPage;
     String TAG1 = "startPage";
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu);
         if (savedInstanceState == null) {
             startPage = new StartPage();
             startPage.setArguments(this.getIntent().getExtras());
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity{
         if (findViewById(R.id.no_of_players) != null) {
             noofPlayers = new NoofPlayers();
             noofPlayers.setArguments(this.getIntent().getExtras());
-            NoofPlayers.activity = this;
             getSupportFragmentManager().beginTransaction().replace(R.id.no_of_players, noofPlayers)
                     .addToBackStack(TAG2).commit();
         }
@@ -49,26 +48,31 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void numberOfPlayers(View view) {
-        if(noofPlayers != null){
+        if (noofPlayers != null) {
             EditText editText = findViewById(R.id.numberInput);
             String s = editText.getText().toString();
             boolean b = true;
-            if(s.isEmpty()){
+            if (s.isEmpty()) {
+                b = false;
+            } else if (Integer.valueOf(s) > 10 || Integer.valueOf(s) < 2) {
                 b = false;
             }
-            else if(Integer.valueOf(s) > 10 || Integer.valueOf(s) < 2){
-                b = false;
-            }
-            if(b) {
+            if (b) {
                 no_of_players = Integer.valueOf(s);
                 nameofPlayers = NameofPlayers.newInstance(no_of_players);
                 nameofPlayers.setArguments(this.getIntent().getExtras());
                 getSupportFragmentManager().beginTransaction().replace(R.id.page_content, nameofPlayers)
                         .addToBackStack(TAG3).commit();
-            }
-            else {
-                Toast.makeText(this, R.string.number_error, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.number_error,
+                        Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onNamesEntered(String[] names) {
+        //todo: transition to game activity
+        Toast.makeText(this, "names entered", Toast.LENGTH_SHORT).show();
     }
 }

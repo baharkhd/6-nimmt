@@ -1,7 +1,6 @@
 package com.example.a6nimmt.menu;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,8 +15,6 @@ import com.example.a6nimmt.R;
  * A simple {@link Fragment} subclass.
  */
 public class NoofPlayers extends Fragment {
-
-    public static Activity activity;
 
 
     public NoofPlayers() {
