@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
     private ArrayList<Card> myCards;
-//    private RecyclerView mRecyclerView;
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,7 +35,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-//        view.setOnClickListener(mOnClickListener);
         return new CardViewHolder(view);
     }
 
@@ -53,16 +51,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Resources res = GameActivity.getGameContext().getResources();
         int resID = res.getIdentifier(cardName , "drawable", GameActivity.getGameContext().getPackageName());
         Bitmap myBitmap=((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
-//        Bitmap imageRounded=Bitmap.createBitmap(myBitmap.getWidth(), myBitmap.getHeight(), myBitmap.getConfig());
-//        Canvas canvas=new Canvas(imageRounded);
-//        Paint myPaint=new Paint();
-//        myPaint.setAntiAlias(true);
-//        myPaint.setShader(new BitmapShader(myBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-//        canvas.drawRoundRect((new RectF(0, 0, myBitmap.getWidth(),
-//                myBitmap.getHeight())), 100, 100, myPaint); // Round Image Corner 100 100 100 100
-
-//        cardImage.setImageBitmap(imageRounded);
-
         cardImage.setImageBitmap(myBitmap);
 
     }

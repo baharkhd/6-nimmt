@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class Game {
 
-    //    private static Context gameContext;
     private GameLogic gameLogic;
     private Activity activity;
 
@@ -46,14 +45,22 @@ public class Game {
     private ArrayList<Card> playerCards = new ArrayList<>();
     private static ArrayList<Card> allCards = new ArrayList<>();
 
+    private Card backOfCard;
+
     private static ArrayList<SelectedCard> selectedCards = new ArrayList<>();
 
+    private TextView score;
+    private TextView username;
+
     private Player current;
-    private int counter = 0 ;
+    private int counter = 0;
+    private Handler handler;
 
     public Game(Activity activity) {
         this.activity = activity;
         this.gameLogic = new GameLogic(this);
+        backOfCard = new Card(0, 0);
+        handler = new Handler();
     }
 
 
@@ -62,14 +69,15 @@ public class Game {
 
         gameLogic.initGame();
 
+        score = activity.findViewById(R.id.score);
+        username = activity.findViewById(R.id.username);
 
+
+        playerCards.add(backOfCard);
         initRecyclerViews();
 
-        final Handler handler = new Handler();
-
         Button userBtn = activity.findViewById(R.id.userButton);
-        final TextView score = activity.findViewById(R.id.score);
-        final TextView username = activity.findViewById(R.id.username);
+
 
         username.setText("??");
         score.setText("??");
@@ -78,60 +86,50 @@ public class Game {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int arraySize = playerCards.size();
-                String currentPlayerName = "??";
-                String currentPlayerScore = "??";
-
-                if (counter == MainActivity.players.size()) {
-                    counter = 0;
-                    playerCards.clear();
-                    playerCards.add(new Card(0, 0));
-
-                }
-
-                else {
-                    current = MainActivity.players.get(counter);
-                    playerCards.clear();
-                    playerCards.addAll(current.getCards());
-
-                    counter++;
-                    currentPlayerName = current.getName();
-                    currentPlayerScore = current.getScore().toString();
-                }
-
-                final String name = currentPlayerName;
-                final String curScore = currentPlayerScore;
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        username.setText(name);
-                        score.setText(curScore);
-
-
-                        row5Adapter.notifyItemRangeRemoved(0, arraySize);
-                        row5Adapter.notifyItemInserted(playerCards.size() - 1);
-                    }
-                });
-
+                showNextUser();
             }
         });
 
-
-
-
     }
 
+    public void showNextUser() {
+        final int arraySize = playerCards.size();
+        String currentPlayerName = "??";
+        String currentPlayerScore = "??";
 
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.game_board);
-//        gameContext = getApplicationContext();
-//
-//        gameLogic = new GameLogic();
-//
-//    }
+        if (counter == MainActivity.players.size()) {
+            counter = 0;
+            playerCards.clear();
+            playerCards.add(backOfCard);
+            gameLogic.placeCards(selectedCards);
+            selectedCards.clear();
+
+        } else {
+            current = MainActivity.players.get(counter);
+            playerCards.clear();
+            playerCards.addAll(current.getCards());
+
+            counter++;
+            currentPlayerName = current.getName();
+            currentPlayerScore = current.getScore().toString();
+        }
+
+        final String name = currentPlayerName;
+        final String curScore = currentPlayerScore;
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                username.setText(name);
+                score.setText(curScore);
+
+
+                row5Adapter.notifyItemRangeRemoved(0, arraySize);
+                row5Adapter.notifyItemInserted(playerCards.size() - 1);
+            }
+        });
+    }
+
 
     public void initRecyclerViews() {
         row1RecyclerView = activity.findViewById(R.id.recyclerView1);

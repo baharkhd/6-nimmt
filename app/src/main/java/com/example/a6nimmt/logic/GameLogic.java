@@ -24,13 +24,6 @@ public class GameLogic {
     private ArrayList<Player> players = MainActivity.players;
     private Game game;
     private Handler handler;
-    //    private ArrayList<ArrayList<Card>> mainCards = new ArrayList<ArrayList<Card>>(4);
-//    private ArrayList<Card> row1 = new ArrayList<>();
-//    private ArrayList<Card> row2 = new ArrayList<>();
-//    private ArrayList<Card> row3 = new ArrayList<>();
-//    private ArrayList<Card> row4 = new ArrayList<>();
-//    private ArrayList<Card> allCards = Game.getAllCards();
-//    private ArrayList<SelectedCard> selectedCards = new ArrayList<>();
     private final int ROW_LIMIT = 5;
     Random random = new Random();
 
@@ -67,55 +60,18 @@ public class GameLogic {
         }
     }
 
-//    public void checkGame() {
-//
-//        selectedCards.clear();
-//        SelectedCard selectedCard1 = new SelectedCard(0, players.get(0).getCards().get(0));
-//        SelectedCard selectedCard2 = new SelectedCard(1, players.get(1).getCards().get(0));
-//        SelectedCard selectedCard3 = new SelectedCard(2, players.get(2).getCards().get(0));
-//        players.get(0).getCards().remove(0);
-//        players.get(1).getCards().remove(0);
-//        players.get(2).getCards().remove(0);
-//
-//
-//        selectedCards.add(selectedCard1);
-//        selectedCards.add(selectedCard2);
-//        selectedCards.add(selectedCard3);
-//
-//        System.out.println("+++ selected allCards :");
-//        for (SelectedCard c :
-//                selectedCards) {
-//            System.out.println(c.getCard().getNumber());
-//        }
-//
-//
-//        Collections.sort(selectedCards, new Comparator<SelectedCard>() {
-//            @Override
-//            public int compare(SelectedCard o1, SelectedCard o2) {
-//                Integer number1 = o1.getCard().getNumber();
-//                Integer number2 = o2.getCard().getNumber();
-//                return number1.compareTo(number2);
-//            }
-//        });
-//
-//
-//
-//
-//        placeCards(selectedCards);
-//
-//        System.out.println("----------------------");
-//        for (int i = 0; i < 4; i++) {
-//            System.out.println("row " + i + " :");
-//            for (Card c :
-//                    mainCards.get(i)) {
-//                System.out.println(c.getNumber());
-//            }
-//            System.out.println("***");
-//        }
-//
-//    }
 
     public void placeCards(ArrayList<SelectedCard> cards) {
+
+        Collections.sort(cards, new Comparator<SelectedCard>() {
+            @Override
+            public int compare(SelectedCard o1, SelectedCard o2) {
+                Integer number1 = o1.getCard().getNumber();
+                Integer number2 = o2.getCard().getNumber();
+                return number1.compareTo(number2);
+            }
+        });
+
         for (SelectedCard card : cards) {
             placeCard(card);
         }
@@ -172,7 +128,6 @@ public class GameLogic {
         } else {
             removeRowAndReplaceCard(card);
         }
-
     }
 
     public void rowIsFull(SelectedCard card, final int rowNumber) {
@@ -184,8 +139,8 @@ public class GameLogic {
         }
 
 //        //Todo : use Handler to update the score
-//        players.get(card.getPlayerNumber()).setScore(players.get(
-//                card.getPlayerNumber()).getScore() + scores);
+        players.get(card.getPlayerNumber()).setScore(players.get(
+                card.getPlayerNumber()).getScore() + scores);
 
 
         //Todo : use Handler to update the row
@@ -194,7 +149,6 @@ public class GameLogic {
         game.getMainCards().get(rowNumber).add(card.getCard());
 
 
-        System.out.println("oyyyyyyyyyyyyyyyyyyyyyyyyyy");
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -238,8 +192,8 @@ public class GameLogic {
 
         //Todo : use Handler to update score and the row
         game.getMainCards().get(rowToBeRemoved).clear();
-//        players.get(myCard.getPlayerNumber()).setScore(players.get(myCard.getPlayerNumber()).getScore()
-//                + minScore);
+        players.get(myCard.getPlayerNumber()).setScore(players.get(myCard.getPlayerNumber()).getScore()
+                + minScore);
 
         game.getMainCards().get(rowToBeRemoved).add(myCard.getCard());
 
