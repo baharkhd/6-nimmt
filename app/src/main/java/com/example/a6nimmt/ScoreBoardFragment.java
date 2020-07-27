@@ -65,6 +65,9 @@ public class ScoreBoardFragment extends DialogFragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+        ArrayList<String> names = getArguments().getStringArrayList("names");
+        ArrayList<String> scores = getArguments().getStringArrayList("scores");
+
         LayoutInflater inflater = (LayoutInflater)GameActivity.getGameContext().getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
@@ -73,26 +76,17 @@ public class ScoreBoardFragment extends DialogFragment {
         TextView textView1;
         TextView textView2;
 
-        ArrayList<String> firsts = new ArrayList<>();
-        firsts.add("bahar");
-        firsts.add("kk");
 
-        ArrayList<String> seconds = new ArrayList<>();
-        seconds.add("baharak");
-        seconds.add("khd");
-
-
-
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < names.size(); i++) {
             TableRow tableRow = (TableRow) inflater.inflate(R.layout.scoreboard_row,null);
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                     TableRow.LayoutParams.WRAP_CONTENT));
 
             textView1 = tableRow.findViewById(R.id.text1);
-            textView1.setText(firsts.get(i));
+            textView1.setText(names.get(i));
 
             textView2 = tableRow.findViewById(R.id.text2);
-            textView2.setText(seconds.get(i));
+            textView2.setText(scores.get(i));
 
 //        TextView playersText = new TextView(GameActivity.getGameContext());
 //        playersText.setText("players");

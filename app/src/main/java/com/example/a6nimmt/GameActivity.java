@@ -85,11 +85,27 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void showScoreboard() {
+
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> scores = new ArrayList<>();
+
+        for (Player player : players) {
+            names.add(player.getName());
+            scores.add(player.getScore().toString());
+        }
+
+
         FragmentManager fm = getSupportFragmentManager();
 
-        ScoreBoardFragment editNameDialogFragment = ScoreBoardFragment.newInstance("Some Title");
+        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Some Title");
 
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        Bundle args = new Bundle();
+        args.putStringArrayList("names", names);
+        args.putStringArrayList("scores", scores);
+        scoreboard.setArguments(args);
+
+
+        scoreboard.show(fm, "fragment_edit_name");
 
     }
 

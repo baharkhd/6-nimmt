@@ -5,51 +5,18 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TableLayout
-        android:id="@+id/scoreboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_column="1"-->
-<!--                android:text="Time" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/textClock"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_column="2"-->
-<!--                android:text="text2" />-->
-
-<!--        </TableRow>-->
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_column="1"-->
-<!--                android:text="Time" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_column="2"-->
-<!--                android:text="text2" />-->
-
-<!--        </TableRow>-->
+        <TableLayout
+            android:id="@+id/scoreboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
-    </TableLayout>
+    </ScrollView>
+
 
     <Button
         android:id="@+id/menuButton"
