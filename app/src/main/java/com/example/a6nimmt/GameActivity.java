@@ -20,6 +20,13 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -60,18 +67,17 @@ public class GameActivity extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (game.isGameIsOver()) {
-//                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
-//                    //Todo : start scoreboard fragment
+                if (game.isGameIsOver()) {
+                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
                     showScoreboard();
 
-//                } else {
-//                    if (game.isCanSelectCard() && game.getCounter() != 0) {
-//                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        game.showNextUser();
-//                    }
-//                }
+                } else {
+                    if (game.isCanSelectCard() && game.getCounter() != 0) {
+                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+                    } else {
+                        game.showNextUser();
+                    }
+                }
 
 
             }
@@ -89,6 +95,13 @@ public class GameActivity extends AppCompatActivity {
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> scores = new ArrayList<>();
 
+        Collections.sort(players, new Comparator<Player>() {
+            @Override
+            public int compare(Player o1, Player o2) {
+                return o1.getScore().compareTo(o2.getScore());
+            }
+        });
+
         for (Player player : players) {
             names.add(player.getName());
             scores.add(player.getScore().toString());
@@ -97,7 +110,7 @@ public class GameActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
 
-        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Some Title");
+        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Scoreboard");
 
         Bundle args = new Bundle();
         args.putStringArrayList("names", names);
@@ -105,7 +118,7 @@ public class GameActivity extends AppCompatActivity {
         scoreboard.setArguments(args);
 
 
-        scoreboard.show(fm, "fragment_edit_name");
+        scoreboard.show(fm, "scoreboard");
 
     }
 
