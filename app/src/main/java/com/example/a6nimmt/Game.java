@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +49,7 @@ public class Game {
     private ArrayList<Card> playerCards = new ArrayList<>();
     private static ArrayList<Card> allCards = new ArrayList<>();
     private boolean canSelectCard = true;
+    private boolean gameIsOver = false;
 
     private Card backOfCard;
     private Button userBtn;
@@ -59,11 +63,12 @@ public class Game {
     private int counter = 0;
     private Handler handler;
 
-    public Game(Activity activity) {
+    public Game(Activity activity, Button userBtn) {
         this.activity = activity;
         this.gameLogic = new GameLogic(this);
         backOfCard = new Card(0, 0);
         handler = new Handler();
+        this.userBtn = userBtn;
     }
 
 
@@ -79,26 +84,41 @@ public class Game {
         playerCards.add(backOfCard);
         initRecyclerViews();
 
-        userBtn = activity.findViewById(R.id.userButton);
+//        userBtn = activity.findViewById(R.id.userButton);
 
 
         username.setText("??");
         score.setText("??");
 
 
-        userBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (canSelectCard && counter != 0) {
-                    Toast.makeText(activity.getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
-                } else {
-                    showNextUser();
-                }
+//        userBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (gameIsOver) {
+//                    Toast.makeText(activity.getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
+//                    //Todo : start scoreboard fragment
+////                showScoreboard();
+//
+//                } else {
+//                    if (canSelectCard && counter != 0) {
+//                        Toast.makeText(activity.getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        showNextUser();
+//                    }
+//                }
+//
+//
+//            }
+//        });
 
+    }
 
-            }
-        });
-
+    public void showScoreboard() {
+//        FragmentManager fm =(GameActivity.getGameContext()).getSupportFragmentManager();
+//
+//        ScoreBoardFragment editNameDialogFragment = ScoreBoardFragment.newInstance("Some Title");
+//
+//        editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
     public void showNextUser() {
@@ -127,17 +147,32 @@ public class Game {
         final String name = currentPlayerName;
         final String curScore = currentPlayerScore;
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                username.setText(name);
-                score.setText(curScore);
+        if (counter == 0 && GameActivity.players.get(0).getCards().size() == 0) {
 
-                row5Adapter.notifyItemRangeRemoved(0, arraySize);
-                row5Adapter.notifyItemInserted(playerCards.size() - 1);
+            gameIsOver = true;
 
-            }
-        });
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    userBtn.setText("Show Scores");
+                    username.setText(name);
+                    score.setText(curScore);
+                }
+            });
+        } else {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    username.setText(name);
+                    score.setText(curScore);
+
+                    row5Adapter.notifyItemRangeRemoved(0, arraySize);
+                    row5Adapter.notifyItemInserted(playerCards.size() - 1);
+
+                }
+            });
+        }
+
     }
 
 
@@ -326,5 +361,17 @@ public class Game {
 
     public void setPlayerCards(ArrayList<Card> playerCards) {
         this.playerCards = playerCards;
+    }
+
+    public boolean isCanSelectCard() {
+        return canSelectCard;
+    }
+
+    public boolean isGameIsOver() {
+        return gameIsOver;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }

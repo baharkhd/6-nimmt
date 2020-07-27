@@ -6,13 +6,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
-import com.example.a6nimmt.cardsUI.CardAdapter;
-import com.example.a6nimmt.logic.Card;
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
 
@@ -21,7 +21,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameActivity extends Activity {
+public class GameActivity extends AppCompatActivity {
 
     public static ArrayList<Player> players = new ArrayList<>();
     private Game game;
@@ -44,7 +44,6 @@ public class GameActivity extends Activity {
         }
 
         gameContext = getApplicationContext();
-        game = new Game(this);
 
         dataManager = new DataManager();
         try {
@@ -55,8 +54,38 @@ public class GameActivity extends Activity {
             e.printStackTrace();
         }
 
-        game.gameInit();
+        Button userBtn = findViewById(R.id.userButton);
+        game = new Game(this, userBtn);
 
+        userBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.isGameIsOver()) {
+                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
+                    //Todo : start scoreboard fragment
+                    showScoreboard();
+
+                } else {
+                    if (game.isCanSelectCard() && game.getCounter() != 0) {
+                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+                    } else {
+                        game.showNextUser();
+                    }
+                }
+
+
+            }
+        });
+
+        game.gameInit();
+    }
+
+    public void showScoreboard() {
+        FragmentManager fm = getSupportFragmentManager();
+
+        ScoreBoardFragment editNameDialogFragment = ScoreBoardFragment.newInstance("Some Title");
+
+        editNameDialogFragment.show(fm, "fragment_edit_name");
 
     }
 
