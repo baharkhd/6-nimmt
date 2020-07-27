@@ -68,10 +68,6 @@ public class GameActivity extends Activity {
         return dataManager;
     }
 
-//    public GameLogic getGameLogic() {
-//        return gameLogic;
-//    }
-
     public static Context getGameContext() {
         return gameContext;
     }

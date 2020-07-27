@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,6 +48,7 @@ public class Game {
     private boolean canSelectCard = true;
 
     private Card backOfCard;
+    private Button userBtn;
 
     private static ArrayList<SelectedCard> selectedCards = new ArrayList<>();
 
@@ -77,7 +79,7 @@ public class Game {
         playerCards.add(backOfCard);
         initRecyclerViews();
 
-        Button userBtn = activity.findViewById(R.id.userButton);
+        userBtn = activity.findViewById(R.id.userButton);
 
 
         username.setText("??");
@@ -87,7 +89,13 @@ public class Game {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showNextUser();
+                if (canSelectCard && counter != 0) {
+                    Toast.makeText(activity.getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+                } else {
+                    showNextUser();
+                }
+
+
             }
         });
 
@@ -125,9 +133,9 @@ public class Game {
                 username.setText(name);
                 score.setText(curScore);
 
-
                 row5Adapter.notifyItemRangeRemoved(0, arraySize);
                 row5Adapter.notifyItemInserted(playerCards.size() - 1);
+
             }
         });
     }
@@ -213,7 +221,7 @@ public class Game {
                     public void onItemClick(View view, final int position) {
 
                         if (counter != 0 && canSelectCard) {
-                            selectedCards.add(new SelectedCard(counter - 1 , playerCards.get(position)));
+                            selectedCards.add(new SelectedCard(counter - 1, playerCards.get(position)));
                             playerCards.remove(position);
                             current.getCards().remove(position);
                             canSelectCard = false;
