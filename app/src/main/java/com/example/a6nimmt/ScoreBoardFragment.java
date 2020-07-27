@@ -1,20 +1,25 @@
 package com.example.a6nimmt;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
+
 public class ScoreBoardFragment extends DialogFragment {
 
     private EditText mEditText;
-
 
 
     public ScoreBoardFragment() {
@@ -26,7 +31,6 @@ public class ScoreBoardFragment extends DialogFragment {
         // Use `newInstance` instead as shown below
 
     }
-
 
 
     public static ScoreBoardFragment newInstance(String title) {
@@ -44,7 +48,6 @@ public class ScoreBoardFragment extends DialogFragment {
     }
 
 
-
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,30 +59,90 @@ public class ScoreBoardFragment extends DialogFragment {
     }
 
 
-
     @Override
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
 
-        // Get field from view
+        LayoutInflater inflater = (LayoutInflater)GameActivity.getGameContext().getSystemService
+                (Context.LAYOUT_INFLATER_SERVICE);
 
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+        TableLayout tableLayout = view.findViewById(R.id.scoreboard);
 
-        // Fetch arguments from bundle and set title
+        TextView textView1;
+        TextView textView2;
 
-        String title = getArguments().getString("title", "Enter Name");
+        ArrayList<String> firsts = new ArrayList<>();
+        firsts.add("bahar");
+        firsts.add("kk");
 
-        getDialog().setTitle(title);
+        ArrayList<String> seconds = new ArrayList<>();
+        seconds.add("baharak");
+        seconds.add("khd");
 
-        // Show soft keyboard automatically and request focus to field
 
-        mEditText.requestFocus();
 
-        getDialog().getWindow().setSoftInputMode(
+        for (int i = 0; i < 2; i++) {
+            TableRow tableRow = (TableRow) inflater.inflate(R.layout.scoreboard_row,null);
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
 
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            textView1 = tableRow.findViewById(R.id.text1);
+            textView1.setText(firsts.get(i));
+
+            textView2 = tableRow.findViewById(R.id.text2);
+            textView2.setText(seconds.get(i));
+
+//        TextView playersText = new TextView(GameActivity.getGameContext());
+//        playersText.setText("players");
+//
+//        TextView scoresText = new TextView(GameActivity.getGameContext());
+//        scoresText.setText("scores");
+//
+//        tableRow.addView(playersText);
+//        tableRow.addView(scoresText);
+
+            tableLayout.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT));
+
+        }
+
+        TableRow tableRow = (TableRow) inflater.inflate(R.layout.scoreboard_row,null);
+        tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+
+//        TextView playersText = new TextView(GameActivity.getGameContext());
+//        playersText.setText("players");
+//
+//        TextView scoresText = new TextView(GameActivity.getGameContext());
+//        scoresText.setText("scores");
+//
+//        tableRow.addView(playersText);
+//        tableRow.addView(scoresText);
+
+        tableLayout.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT));
+
+
+//        // Get field from view
+//
+//        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+//
+//        // Fetch arguments from bundle and set title
+//
+//        String title = getArguments().getString("title", "Enter Name");
+//
+//        getDialog().setTitle(title);
+//
+//        // Show soft keyboard automatically and request focus to field
+//
+//        mEditText.requestFocus();
+//
+//        getDialog().getWindow().setSoftInputMode(
+//
+//                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
     }
 }

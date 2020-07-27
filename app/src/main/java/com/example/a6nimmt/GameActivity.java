@@ -60,24 +60,28 @@ public class GameActivity extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (game.isGameIsOver()) {
-                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
-                    //Todo : start scoreboard fragment
+//                if (game.isGameIsOver()) {
+//                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
+//                    //Todo : start scoreboard fragment
                     showScoreboard();
 
-                } else {
-                    if (game.isCanSelectCard() && game.getCounter() != 0) {
-                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
-                    } else {
-                        game.showNextUser();
-                    }
-                }
+//                } else {
+//                    if (game.isCanSelectCard() && game.getCounter() != 0) {
+//                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        game.showNextUser();
+//                    }
+//                }
 
 
             }
         });
 
         game.gameInit();
+    }
+
+    public void onMenuButtonClick(View view) {
+        Toast.makeText(this, "scoreboard!", Toast.LENGTH_LONG).show();
     }
 
     public void showScoreboard() {
