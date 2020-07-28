@@ -1,7 +1,7 @@
 package com.example.a6nimmt;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
+import com.example.a6nimmt.scoreboard.ScoreBoardFragment;
 
 import org.json.JSONException;
 
@@ -22,11 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -67,17 +63,18 @@ public class GameActivity extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (game.isGameIsOver()) {
-                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
-                    showScoreboard();
-
-                } else {
-                    if (game.isCanSelectCard() && game.getCounter() != 0) {
-                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
-                    } else {
-                        game.showNextUser();
-                    }
-                }
+                showScoreboard();
+//                if (game.isGameIsOver()) {
+//                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
+//                    showScoreboard();
+//
+//                } else {
+//                    if (game.isCanSelectCard() && game.getCounter() != 0) {
+//                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        game.showNextUser();
+//                    }
+//                }
 
 
             }
@@ -87,7 +84,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onMenuButtonClick(View view) {
-        Toast.makeText(this, "scoreboard!", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "scoreboard!", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
     public void showScoreboard() {

@@ -1,35 +1,25 @@
-package com.example.a6nimmt;
+package com.example.a6nimmt.scoreboard;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.a6nimmt.MenuActivity;
+import com.example.a6nimmt.R;
 
 import java.util.ArrayList;
 
 public class ScoreBoardFragment extends DialogFragment {
 
-    private EditText mEditText;
-
-
     public ScoreBoardFragment() {
-
-        // Empty constructor is required for DialogFragment
-
-        // Make sure not to add arguments to the constructor
-
-        // Use `newInstance` instead as shown below
-
     }
 
 
@@ -39,7 +29,7 @@ public class ScoreBoardFragment extends DialogFragment {
 
         Bundle args = new Bundle();
 
-        args.putString("title", title);
+        args.putString("scoreboard", title);
 
         frag.setArguments(args);
 
@@ -54,7 +44,7 @@ public class ScoreBoardFragment extends DialogFragment {
 
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_layout, container);
+        return inflater.inflate(R.layout.scoreboard_layout, container);
 
     }
 
@@ -68,7 +58,11 @@ public class ScoreBoardFragment extends DialogFragment {
         ArrayList<String> names = getArguments().getStringArrayList("names");
         ArrayList<String> scores = getArguments().getStringArrayList("scores");
 
-        LayoutInflater inflater = (LayoutInflater)GameActivity.getGameContext().getSystemService
+        //Todo : change it!
+//        LayoutInflater inflater = (LayoutInflater) GameActivity.getGameContext().getSystemService
+//                (Context.LAYOUT_INFLATER_SERVICE);
+
+        LayoutInflater inflater = (LayoutInflater) MenuActivity.appContext.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
         TableLayout tableLayout = view.findViewById(R.id.scoreboard);
@@ -88,15 +82,6 @@ public class ScoreBoardFragment extends DialogFragment {
             textView2 = tableRow.findViewById(R.id.text2);
             textView2.setText(scores.get(i));
 
-//        TextView playersText = new TextView(GameActivity.getGameContext());
-//        playersText.setText("players");
-//
-//        TextView scoresText = new TextView(GameActivity.getGameContext());
-//        scoresText.setText("scores");
-//
-//        tableRow.addView(playersText);
-//        tableRow.addView(scoresText);
-
             tableLayout.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
 
@@ -106,37 +91,8 @@ public class ScoreBoardFragment extends DialogFragment {
         tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT));
 
-
-//        TextView playersText = new TextView(GameActivity.getGameContext());
-//        playersText.setText("players");
-//
-//        TextView scoresText = new TextView(GameActivity.getGameContext());
-//        scoresText.setText("scores");
-//
-//        tableRow.addView(playersText);
-//        tableRow.addView(scoresText);
-
         tableLayout.addView(tableRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT));
-
-
-//        // Get field from view
-//
-//        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-//
-//        // Fetch arguments from bundle and set title
-//
-//        String title = getArguments().getString("title", "Enter Name");
-//
-//        getDialog().setTitle(title);
-//
-//        // Show soft keyboard automatically and request focus to field
-//
-//        mEditText.requestFocus();
-//
-//        getDialog().getWindow().setSoftInputMode(
-//
-//                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
     }
 }

@@ -9,6 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         >
 
         <TableLayout
@@ -22,9 +24,12 @@
 
     <Button
         android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:onClick="onMenuButtonClick"
-        android:text="go to menu" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_button"
+        android:layout_gravity="center"
+        android:text="back to menu" />
 
 </LinearLayout>
