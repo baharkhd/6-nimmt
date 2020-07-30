@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@drawable/custom_border"
     android:orientation="vertical">
 
     <ScrollView
@@ -30,6 +31,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
         android:layout_gravity="center"
+        android:fontFamily="@font/my_baby"
         android:text="back to menu" />
 
 </LinearLayout>

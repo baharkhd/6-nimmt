@@ -21,6 +21,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -63,18 +64,17 @@ public class GameActivity extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showScoreboard();
-//                if (game.isGameIsOver()) {
-//                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
-//                    showScoreboard();
-//
-//                } else {
-//                    if (game.isCanSelectCard() && game.getCounter() != 0) {
-//                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        game.showNextUser();
-//                    }
-//                }
+                if (game.isGameIsOver()) {
+                    Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
+                    showScoreboard();
+
+                } else {
+                    if (game.isCanSelectCard() && game.getCounter() != 0) {
+                        Toast.makeText(getApplicationContext(), "Choose a card, please!", Toast.LENGTH_LONG).show();
+                    } else {
+                        game.showNextUser();
+                    }
+                }
 
 
             }

@@ -5,6 +5,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +37,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+
+//        Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
+//        animation.setDuration(500);
+//        view.startAnimation(animation);
+
         return new CardViewHolder(view);
     }
 
@@ -53,6 +60,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Bitmap myBitmap=((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
         cardImage.setImageBitmap(myBitmap);
 
+        setAnimation(holder.itemView, position);
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+//        if (position > lastPosition)
+//        {
+            Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
+            viewToAnimate.startAnimation(animation);
+//            lastPosition = position;
+//        }
     }
 
     @Override

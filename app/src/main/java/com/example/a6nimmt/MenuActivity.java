@@ -38,55 +38,56 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
         appContext = this.getApplicationContext();
 
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<String> scores = new ArrayList<>();
+//        ArrayList<String> names = new ArrayList<>();
+//        ArrayList<String> scores = new ArrayList<>();
 
-        names.add("player1");
-        names.add("player2");
-        names.add("player3");
-        names.add("player4");
-        names.add("player5");
-        names.add("player6");
-        names.add("player7");
-        names.add("player8");
-        names.add("player9");
-        names.add("player10");
-
-
-        scores.add("1");
-        scores.add("2");
-        scores.add("3");
-        scores.add("4");
-        scores.add("5");
-        scores.add("6");
-        scores.add("7");
-        scores.add("8");
-        scores.add("9");
-        scores.add("10");
+//        names.add("player1");
+//        names.add("player2");
+//        names.add("player3");
+//        names.add("player4");
+//        names.add("player5");
+//        names.add("player6");
+//        names.add("player7");
+//        names.add("player8");
+//        names.add("player9");
+//        names.add("player10");
 
 
-        FragmentManager fm = getSupportFragmentManager();
+//        Intent myIntent = new Intent(this, GameActivity.class);
+//        myIntent.putExtra("playerNames", names);
+//        startActivity(myIntent);
 
-        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Scoreboard");
+//        scores.add("1");
+//        scores.add("2");
+//        scores.add("3");
+//        scores.add("4");
+//        scores.add("5");
+//        scores.add("6");
+//        scores.add("7");
+//        scores.add("8");
+//        scores.add("9");
+//        scores.add("10");
+//
+//
+//        FragmentManager fm = getSupportFragmentManager();
+//
+//        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Scoreboard");
+//
+//        Bundle args = new Bundle();
+//        args.putStringArrayList("names", names);
+//        args.putStringArrayList("scores", scores);
+//        scoreboard.setArguments(args);
+//
+//
+//        scoreboard.show(fm, "scoreboard");
 
-        Bundle args = new Bundle();
-        args.putStringArrayList("names", names);
-        args.putStringArrayList("scores", scores);
-        scoreboard.setArguments(args);
 
-
-        scoreboard.show(fm, "scoreboard");
-
-
-
-
-
-//        if (savedInstanceState == null) {
-//            startPage = new StartPage();
-//            startPage.setArguments(this.getIntent().getExtras());
-//            getSupportFragmentManager().beginTransaction().replace(R.id.page_content, startPage)
-//                    .addToBackStack(TAG1).commit();
-//        }
+        if (savedInstanceState == null) {
+            startPage = new StartPage();
+            startPage.setArguments(this.getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().replace(R.id.page_content, startPage)
+                    .addToBackStack(TAG1).commit();
+        }
     }
 
     public void startButton(View view) {

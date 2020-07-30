@@ -1,10 +1,13 @@
 package com.example.a6nimmt.scoreboard;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -44,7 +47,12 @@ public class ScoreBoardFragment extends DialogFragment {
 
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.scoreboard_layout, container);
+        View view = inflater.inflate(R.layout.scoreboard_layout, container, false);
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+        return view;
 
     }
 
