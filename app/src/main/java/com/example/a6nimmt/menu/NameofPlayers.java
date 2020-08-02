@@ -52,23 +52,35 @@ public class NameofPlayers extends Fragment {
         editTexts = new EditText[noOfPlayers];
         names = new String[noOfPlayers];
         LinearLayout linearLayout = new LinearLayout(getContext());
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayout.setLayoutParams(params);
+        linearLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+        linearLayout.setHorizontalGravity(Gravity.CENTER_VERTICAL);
+
         linearLayout.setGravity(Gravity.CENTER);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < noOfPlayers; i++) {
-            EditText e = new EditText(getContext());
-            e.setHint(R.string.name_of_player);
-            e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
+//            EditText e = new EditText(getContext());
+            EditText e = (EditText) inflater.inflate(R.layout.player_name_layout, container, false);
+
+
+
+//            e.setBackgroundResource(R.drawable.custom_border);
+//            e.setHint(R.string.name_of_player);
+//
+//            e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                    ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(e);
             editTexts[i] = e;
         }
-        Button ok = new Button(getContext());
-        ok.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        ok.setText(R.string.ok);
+        Button ok = (Button) inflater.inflate(R.layout.ok_button, container, false);
+//        ok.setBackgroundResource(R.drawable.custom_button);
+//        ok.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT));
+//        ok.setText(R.string.ok);
         linearLayout.addView(ok);
         getNames(ok);
         return linearLayout;

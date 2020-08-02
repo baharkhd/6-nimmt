@@ -2,4 +2,5 @@
 <resources>
     <dimen name="spaceBetweenCards">2.5dp</dimen>
     <dimen name="nextUserBtnWidth">150dp</dimen>
+    <dimen name="namesTextEdit">280dp</dimen>
 </resources>
