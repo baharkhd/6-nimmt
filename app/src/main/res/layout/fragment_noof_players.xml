@@ -5,18 +5,20 @@
     android:layout_height="wrap_content"
     tools:context=".menu.NoofPlayers">
 
-    <EditText
-        android:id="@+id/numberInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/noofplayers"
-        android:inputType="numberDecimal" />
+<!--    <EditText-->
+<!--        android:id="@+id/numberInput"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/custom_border"-->
+<!--        android:hint="@string/noofplayers"-->
+<!--        android:inputType="numberDecimal" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="numberOfPlayers"
-        android:text="@string/ok"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        tools:ignore="OnClick" />
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:onClick="numberOfPlayers"-->
+<!--        android:background="@drawable/custom_button"-->
+<!--        android:text="@string/ok"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--        tools:ignore="OnClick" />-->
 </LinearLayout>

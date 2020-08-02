@@ -124,4 +124,5 @@ public class NameofPlayers extends Fragment {
     public interface OnNamesListener {
         void onNamesEntered(String[] names);
     }
+
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/custom_border"
+    android:gravity="center"
+    tools:context=".menu.NoofPlayers"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+
+        >
+
+        <TextView
+            android:id="@+id/enterNumOfPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/noofplayers" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enterNumOfPlayers"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/numberInput"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="7dp"
+                android:textAlignment="center"
+                android:background="@drawable/custom_border"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/numPLayersBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button"
+                android:onClick="numberOfPlayers"
+                android:layout_marginLeft="7dp"
+                android:text="@string/ok"
+                tools:ignore="OnClick" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

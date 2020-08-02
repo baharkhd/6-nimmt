@@ -84,7 +84,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onMenuButtonClick(View view) {
-//        Toast.makeText(this, "scoreboard!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }

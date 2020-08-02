@@ -1,6 +1,7 @@
 package com.example.a6nimmt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
@@ -28,6 +29,8 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     NameofPlayers nameofPlayers;
     String TAG3 = "nameofPlayers";
     public static int no_of_players;
+    private static EditText numOfPlayersEditText;
+    private NoofPlayers numOfPlayersFrag;
 
     public static Context appContext;
 
@@ -37,49 +40,6 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         setContentView(R.layout.activity_menu);
 
         appContext = this.getApplicationContext();
-
-//        ArrayList<String> names = new ArrayList<>();
-//        ArrayList<String> scores = new ArrayList<>();
-
-//        names.add("player1");
-//        names.add("player2");
-//        names.add("player3");
-//        names.add("player4");
-//        names.add("player5");
-//        names.add("player6");
-//        names.add("player7");
-//        names.add("player8");
-//        names.add("player9");
-//        names.add("player10");
-
-
-//        Intent myIntent = new Intent(this, GameActivity.class);
-//        myIntent.putExtra("playerNames", names);
-//        startActivity(myIntent);
-
-//        scores.add("1");
-//        scores.add("2");
-//        scores.add("3");
-//        scores.add("4");
-//        scores.add("5");
-//        scores.add("6");
-//        scores.add("7");
-//        scores.add("8");
-//        scores.add("9");
-//        scores.add("10");
-//
-//
-//        FragmentManager fm = getSupportFragmentManager();
-//
-//        ScoreBoardFragment scoreboard = ScoreBoardFragment.newInstance("Scoreboard");
-//
-//        Bundle args = new Bundle();
-//        args.putStringArrayList("names", names);
-//        args.putStringArrayList("scores", scores);
-//        scoreboard.setArguments(args);
-//
-//
-//        scoreboard.show(fm, "scoreboard");
 
 
         if (savedInstanceState == null) {
@@ -91,12 +51,15 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     }
 
     public void startButton(View view) {
-        if (findViewById(R.id.no_of_players) != null) {
-            noofPlayers = new NoofPlayers();
-            noofPlayers.setArguments(this.getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().replace(R.id.no_of_players, noofPlayers)
-                    .addToBackStack(TAG2).commit();
-        }
+        FragmentManager fm = getSupportFragmentManager();
+
+        numOfPlayersFrag = NoofPlayers.newInstance("num of players");
+
+        Bundle args = new Bundle();
+        numOfPlayersFrag.setArguments(args);
+
+
+        numOfPlayersFrag.show(fm, "num of players");
     }
 
     public void exitButton(View view) {
@@ -104,26 +67,26 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     }
 
     public void numberOfPlayers(View view) {
-        if (noofPlayers != null) {
-            EditText editText = findViewById(R.id.numberInput);
-            String s = editText.getText().toString();
-            boolean b = true;
-            if (s.isEmpty()) {
-                b = false;
-            } else if (Integer.valueOf(s) > 10 || Integer.valueOf(s) < 2) {
-                b = false;
-            }
-            if (b) {
-                no_of_players = Integer.valueOf(s);
-                nameofPlayers = NameofPlayers.newInstance(no_of_players);
-                nameofPlayers.setArguments(this.getIntent().getExtras());
-                getSupportFragmentManager().beginTransaction().replace(R.id.page_content, nameofPlayers)
-                        .addToBackStack(TAG3).commit();
-            } else {
-                Toast.makeText(this, R.string.number_error,
-                        Toast.LENGTH_SHORT).show();
-            }
+        EditText editText = numOfPlayersEditText;
+        String s = editText.getText().toString();
+        boolean b = true;
+        if (s.isEmpty()) {
+            b = false;
+        } else if (Integer.valueOf(s) > 10 || Integer.valueOf(s) < 2) {
+            b = false;
         }
+        if (b) {
+            no_of_players = Integer.valueOf(s);
+            nameofPlayers = NameofPlayers.newInstance(no_of_players);
+            nameofPlayers.setArguments(this.getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().remove(numOfPlayersFrag).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.page_content, nameofPlayers)
+                    .addToBackStack(TAG3).commit();
+        } else {
+            Toast.makeText(this, R.string.number_error,
+                    Toast.LENGTH_SHORT).show();
+        }
+//        }
     }
 
     @Override
@@ -133,5 +96,9 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         Intent myIntent = new Intent(this, GameActivity.class);
         myIntent.putExtra("playerNames", names);
         startActivity(myIntent);
+    }
+
+    public static void setNumOfPlayersEditText(EditText numOfPlayersEditText) {
+        MenuActivity.numOfPlayersEditText = numOfPlayersEditText;
     }
 }

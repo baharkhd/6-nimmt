@@ -66,10 +66,6 @@ public class ScoreBoardFragment extends DialogFragment {
         ArrayList<String> names = getArguments().getStringArrayList("names");
         ArrayList<String> scores = getArguments().getStringArrayList("scores");
 
-        //Todo : change it!
-//        LayoutInflater inflater = (LayoutInflater) GameActivity.getGameContext().getSystemService
-//                (Context.LAYOUT_INFLATER_SERVICE);
-
         LayoutInflater inflater = (LayoutInflater) MenuActivity.appContext.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
