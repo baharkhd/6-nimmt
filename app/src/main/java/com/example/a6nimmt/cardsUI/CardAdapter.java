@@ -1,4 +1,5 @@
 package com.example.a6nimmt.cardsUI;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -38,10 +39,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
 
-//        Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
-//        animation.setDuration(500);
-//        view.startAnimation(animation);
-
         return new CardViewHolder(view);
     }
 
@@ -56,23 +53,19 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             cardName = "card" + myCards.get(position).getNumber();
         }
         Resources res = GameActivity.getGameContext().getResources();
-        int resID = res.getIdentifier(cardName , "drawable", GameActivity.getGameContext().getPackageName());
-        Bitmap myBitmap=((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
+        int resID = res.getIdentifier(cardName, "drawable", GameActivity.getGameContext().getPackageName());
+        Bitmap myBitmap = ((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
         cardImage.setImageBitmap(myBitmap);
 
         setAnimation(holder.itemView, position);
 
     }
 
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-//        if (position > lastPosition)
-//        {
-            Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
-            viewToAnimate.startAnimation(animation);
-//            lastPosition = position;
-//        }
+    private void setAnimation(View viewToAnimate, int position) {
+
+        Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
+        viewToAnimate.startAnimation(animation);
+
     }
 
     @Override

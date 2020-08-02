@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +33,8 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     private static EditText numOfPlayersEditText;
     private NoofPlayers numOfPlayersFrag;
 
+    private MediaPlayer buttonClickSound;
+
     public static Context appContext;
 
     @Override
@@ -40,6 +43,8 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         setContentView(R.layout.activity_menu);
 
         appContext = this.getApplicationContext();
+
+        buttonClickSound = MediaPlayer.create(this, R.raw.button_click_1);
 
 
         if (savedInstanceState == null) {
@@ -51,6 +56,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     }
 
     public void startButton(View view) {
+        buttonClickSound.start();
         FragmentManager fm = getSupportFragmentManager();
 
         numOfPlayersFrag = NoofPlayers.newInstance("num of players");
@@ -60,13 +66,17 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
 
         numOfPlayersFrag.show(fm, "num of players");
+
+
     }
 
     public void exitButton(View view) {
+        buttonClickSound.start();
         startPage.exitButton(view);
     }
 
     public void numberOfPlayers(View view) {
+        buttonClickSound.start();
         EditText editText = numOfPlayersEditText;
         String s = editText.getText().toString();
         boolean b = true;
@@ -86,11 +96,11 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
             Toast.makeText(this, R.string.number_error,
                     Toast.LENGTH_SHORT).show();
         }
-//        }
     }
 
     @Override
     public void onNamesEntered(String[] names) {
+        buttonClickSound.start();
         Toast.makeText(this, "names entered", Toast.LENGTH_SHORT).show();
 
         Intent myIntent = new Intent(this, GameActivity.class);

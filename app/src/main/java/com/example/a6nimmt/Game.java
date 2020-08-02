@@ -1,6 +1,7 @@
 package com.example.a6nimmt;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.view.View;
@@ -63,12 +64,15 @@ public class Game {
     private int counter = 0;
     private Handler handler;
 
+    private MediaPlayer onCardClickSound;
+
     public Game(Activity activity, Button userBtn) {
         this.activity = activity;
         this.gameLogic = new GameLogic(this);
         backOfCard = new Card(0, 0);
         handler = new Handler();
         this.userBtn = userBtn;
+        onCardClickSound = MediaPlayer.create(GameActivity.getGameContext(), R.raw.button_click_1);
     }
 
 
@@ -254,7 +258,7 @@ public class Game {
                         , new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, final int position) {
-
+                        onCardClickSound.start();
                         if (counter != 0 && canSelectCard) {
                             selectedCards.add(new SelectedCard(counter - 1, playerCards.get(position)));
                             playerCards.remove(position);

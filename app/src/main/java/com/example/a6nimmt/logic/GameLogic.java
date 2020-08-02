@@ -1,5 +1,6 @@
 package com.example.a6nimmt.logic;
 
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 
@@ -7,6 +8,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.a6nimmt.Game;
 import com.example.a6nimmt.GameActivity;
+import com.example.a6nimmt.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +28,7 @@ public class GameLogic {
     private Handler handler;
     private final int ROW_LIMIT = 5;
     Random random = new Random();
+    private MediaPlayer placeCardsSound;
 
     public GameLogic(Game game) {
         this.game = game;
@@ -34,6 +37,8 @@ public class GameLogic {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void initGame() {
+
+        placeCardsSound = MediaPlayer.create(GameActivity.getGameContext(), R.raw.card_places);
 
 
         int initCardNumber = 4 + GameActivity.players.size() * 10;
@@ -62,6 +67,7 @@ public class GameLogic {
 
 
     public void placeCards(ArrayList<SelectedCard> cards) {
+        placeCardsSound.start();
 
         Collections.sort(cards, new Comparator<SelectedCard>() {
             @Override

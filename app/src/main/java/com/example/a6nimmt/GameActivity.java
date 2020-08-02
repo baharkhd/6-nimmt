@@ -2,6 +2,7 @@ package com.example.a6nimmt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -32,12 +33,16 @@ public class GameActivity extends AppCompatActivity {
     private DataManager dataManager;
     private static Context gameContext;
 
+    private MediaPlayer buttonClickSound;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_board);
+
+        buttonClickSound = MediaPlayer.create(this, R.raw.button_click_1);
 
         Bundle extras = getIntent().getExtras();
         String[] names = extras.getStringArray("playerNames");
@@ -64,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         userBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonClickSound.start();
                 if (game.isGameIsOver()) {
                     Toast.makeText(getApplicationContext(), "Game Over!", Toast.LENGTH_LONG).show();
                     showScoreboard();
@@ -84,12 +90,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onMenuButtonClick(View view) {
+        buttonClickSound.start();
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
     public void showScoreboard() {
-
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> scores = new ArrayList<>();
 
