@@ -101,7 +101,6 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     @Override
     public void onNamesEntered(String[] names) {
         buttonClickSound.start();
-        Toast.makeText(this, "names entered", Toast.LENGTH_SHORT).show();
 
         Intent myIntent = new Intent(this, GameActivity.class);
         myIntent.putExtra("playerNames", names);

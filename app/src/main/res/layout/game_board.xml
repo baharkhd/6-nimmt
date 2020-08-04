@@ -37,24 +37,36 @@
         android:layout_height="450dp"
         android:layout_marginTop="40dp"
         app:layout_constraintBottom_toTopOf="@+id/userButton"
-        app:layout_constraintEnd_toStartOf="@+id/recyclerView5"
+        app:layout_constraintEnd_toStartOf="@+id/separator"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/recyclerView3"
         app:layout_constraintTop_toTopOf="parent"
         android:layoutAnimation="@anim/layout_animation"
         app:layout_constraintVertical_bias="0.0" />
 
+    <View
+        android:id="@+id/separator"
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/recyclerView5"
+        app:layout_constraintStart_toEndOf="@+id/recyclerView4"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/light_gray"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView5"
         android:layout_width="60dp"
         android:layout_height="622dp"
         android:layout_marginTop="40dp"
+        android:layoutAnimation="@anim/layout_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/recyclerView4"
+        app:layout_constraintStart_toEndOf="@+id/separator"
         app:layout_constraintTop_toTopOf="parent"
-        android:layoutAnimation="@anim/layout_animation"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
