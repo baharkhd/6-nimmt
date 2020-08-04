@@ -186,6 +186,7 @@ public class Game {
         row1Adapter.setHasStableIds(true);
         row1RecyclerView.setAdapter(row1Adapter);
         row1RecyclerView.setHasFixedSize(true);
+        row1RecyclerView.setItemViewCacheSize(5);
 
 
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(activity) {
@@ -202,6 +203,7 @@ public class Game {
         row2Adapter.setHasStableIds(true);
         row2RecyclerView.setAdapter(row2Adapter);
         row2RecyclerView.setHasFixedSize(true);
+        row2RecyclerView.setItemViewCacheSize(5);
 
 
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(activity) {
@@ -218,6 +220,7 @@ public class Game {
         row3Adapter.setHasStableIds(true);
         row3RecyclerView.setAdapter(row3Adapter);
         row3RecyclerView.setHasFixedSize(true);
+        row3RecyclerView.setItemViewCacheSize(5);
 
 
         RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(activity) {
@@ -234,6 +237,7 @@ public class Game {
         row4Adapter.setHasStableIds(true);
         row4RecyclerView.setAdapter(row4Adapter);
         row4RecyclerView.setHasFixedSize(true);
+        row4RecyclerView.setItemViewCacheSize(5);
 
 
         RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(activity) {
@@ -250,6 +254,7 @@ public class Game {
         row5Adapter.setHasStableIds(true);
         row5RecyclerView.setAdapter(row5Adapter);
         row5RecyclerView.setHasFixedSize(true);
+        row5RecyclerView.setItemViewCacheSize(10);
 
         final Handler handler = new Handler();
 

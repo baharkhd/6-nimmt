@@ -16,7 +16,7 @@
     <string name="noofplayers">Enter the number of players</string>
     <string name="ok">OK</string>
     <string name="number_error">The number of players should be between 2 and 10</string>
-    <string name="name_of_player">Enter the name of the player</string>
+    <string name="name_of_player">Enter name of the player</string>
     <string name="enter_names">Please Enter a unique name for each player!</string>
     <string name="next_user">Next User</string>
 

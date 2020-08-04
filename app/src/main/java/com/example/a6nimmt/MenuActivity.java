@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -78,7 +79,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     public void numberOfPlayers(View view) {
         buttonClickSound.start();
         EditText editText = numOfPlayersEditText;
-        String s = editText.getText().toString();
+        String s = editText.getText().toString().trim();
         boolean b = true;
         if (s.isEmpty()) {
             b = false;

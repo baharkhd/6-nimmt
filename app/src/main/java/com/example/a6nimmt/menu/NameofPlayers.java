@@ -63,24 +63,12 @@ public class NameofPlayers extends Fragment {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < noOfPlayers; i++) {
 
-//            EditText e = new EditText(getContext());
             EditText e = (EditText) inflater.inflate(R.layout.player_name_layout, container, false);
 
-
-
-//            e.setBackgroundResource(R.drawable.custom_border);
-//            e.setHint(R.string.name_of_player);
-//
-//            e.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(e);
             editTexts[i] = e;
         }
         Button ok = (Button) inflater.inflate(R.layout.ok_button, container, false);
-//        ok.setBackgroundResource(R.drawable.custom_button);
-//        ok.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT));
-//        ok.setText(R.string.ok);
         linearLayout.addView(ok);
         getNames(ok);
         return linearLayout;
