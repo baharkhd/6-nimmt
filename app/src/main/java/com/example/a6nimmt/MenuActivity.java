@@ -70,6 +70,11 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
     }
 
+     @Override public void onResume(){
+        super.onResume();
+        background();
+     }
+
     public void exitButton(View view) {
         buttonClickSound.start();
         startPage.exitButton(view);
@@ -121,8 +126,12 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
     public void backgroundChosen(View view) {
         background = view.getId();
+        background();
+    }
+
+    private void background() {
         RelativeLayout menuBackground = findViewById(R.id.menu_background);
-        switch (view.getId()){
+        switch (background){
             case  R.id.red_image:
                 menuBackground.setBackgroundResource(R.drawable.red_colored_background);
                 break;

@@ -98,7 +98,6 @@ public class NameofPlayers extends Fragment {
                         break;
                     }
                     for (int j = 0; j < i; j++) {
-                        System.out.println(names[i]);
                         if (names[j].equals(s)) {
                             entered_correctly = false;
                             break;
