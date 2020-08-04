@@ -6,7 +6,7 @@
     android:id="@+id/game_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GameActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView3"
@@ -47,7 +47,7 @@
 
     <View
         android:id="@+id/separator"
-        android:layout_width="10dp"
+        android:layout_width="8dp"
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"

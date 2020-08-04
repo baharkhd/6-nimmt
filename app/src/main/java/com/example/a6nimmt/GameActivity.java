@@ -57,6 +57,9 @@ public class GameActivity extends AppCompatActivity {
                 names) {
             players.add(new Player(name, 0));
         }
+//        players.add(new Player("bahar", 0));
+//        players.add(new Player("shubu", 0));
+//        players.add(new Player("shughu", 0));
 
         gameContext = getApplicationContext();
 

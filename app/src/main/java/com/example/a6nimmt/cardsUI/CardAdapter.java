@@ -3,6 +3,7 @@ package com.example.a6nimmt.cardsUI;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
     private ArrayList<Card> myCards;
+    private Handler handler;
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,6 +34,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     public CardAdapter(ArrayList<Card> myCards) {
         this.myCards = myCards;
+        handler = new Handler();
     }
 
     @NonNull
@@ -43,7 +46,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CardViewHolder holder, final int position) {
         ImageView cardImage = holder.itemView.findViewById(R.id.image);
 
         String cardName;
@@ -57,7 +60,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Bitmap myBitmap = ((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
         cardImage.setImageBitmap(myBitmap);
 
-        setAnimation(holder.itemView, position);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                setAnimation(holder.itemView, position);
+            }
+        });
+
+
 
     }
 
