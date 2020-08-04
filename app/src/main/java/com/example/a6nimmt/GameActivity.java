@@ -47,9 +47,12 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String[] names = extras.getStringArray("playerNames");
+
+
         int background = extras.getInt("background");
         setBackground(background);
 
+        players.clear();
         for (String name :
                 names) {
             players.add(new Player(name, 0));
