@@ -29,11 +29,9 @@ public class NameofPlayers extends Fragment {
         // Required empty public constructor
     }
 
-    public static NameofPlayers newInstance(int noOfPlayers) {
+    public static NameofPlayers newInstance() {
         NameofPlayers fragment = new NameofPlayers();
-        fragment.noOfPlayers = noOfPlayers;
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, String.valueOf(noOfPlayers));
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +40,7 @@ public class NameofPlayers extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            noOfPlayers = Integer.parseInt(getArguments().getString(ARG_PARAM1));
+            noOfPlayers = getArguments().getInt(ARG_PARAM1);
         }
     }
 

@@ -93,15 +93,24 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         }
         if (b) {
             no_of_players = Integer.valueOf(s);
-            nameofPlayers = NameofPlayers.newInstance(no_of_players);
-            nameofPlayers.setArguments(this.getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().remove(numOfPlayersFrag).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.page_content, nameofPlayers)
-                    .addToBackStack(TAG3).commit();
+            enterNamesFragment();
         } else {
             Toast.makeText(this, R.string.number_error,
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void enterNamesFragment() {
+        nameofPlayers = NameofPlayers.newInstance();
+
+        Bundle args = new Bundle();
+        args.putInt("param1", no_of_players);
+        nameofPlayers.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction().remove(numOfPlayersFrag).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.page_content, nameofPlayers)
+                .addToBackStack(TAG3).commit();
+
     }
 
     @Override
