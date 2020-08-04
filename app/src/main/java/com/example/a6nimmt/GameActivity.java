@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.a6nimmt.logic.DataManager;
@@ -46,6 +47,8 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String[] names = extras.getStringArray("playerNames");
+        int background = extras.getInt("background");
+        setBackground(background);
 
         for (String name :
                 names) {
@@ -136,5 +139,25 @@ public class GameActivity extends AppCompatActivity {
 
     public static Context getGameContext() {
         return gameContext;
+    }
+
+    private void setBackground(int id){
+        ConstraintLayout gameBackground = findViewById(R.id.game_background);
+        switch (id){
+            case  R.id.red_image:
+                gameBackground.setBackgroundResource(R.drawable.red_colored_background);
+                break;
+            case R.id.dark_image:
+                gameBackground.setBackgroundResource(R.drawable.dark_blue_background);
+                break;
+            case R.id.colorful_image:
+                gameBackground.setBackgroundResource(R.drawable.bright_colors_background);
+                break;
+            case R.id.white:
+                gameBackground.setBackgroundResource(R.drawable.light_wooden_background);
+                View view = findViewById(R.id.separator);
+                view.setVisibility(View.GONE);
+                break;
+        }
     }
 }

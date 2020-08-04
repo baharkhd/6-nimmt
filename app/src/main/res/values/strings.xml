@@ -19,6 +19,8 @@
     <string name="name_of_player">Enter name of the player</string>
     <string name="enter_names">Please Enter a unique name for each player!</string>
     <string name="next_user">Next User</string>
+    <string name="chenge_background">change the background</string>
+    <string name="choose_back">choose your background</string>
 
 
 </resources>
