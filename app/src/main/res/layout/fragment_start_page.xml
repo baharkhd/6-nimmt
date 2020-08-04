@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".menu.StartPage">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/chenge_background"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:onClick="changeBackground"/>
+
 
     <Button
         android:id="@+id/start"

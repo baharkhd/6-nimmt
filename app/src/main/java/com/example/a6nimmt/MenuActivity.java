@@ -1,7 +1,7 @@
 package com.example.a6nimmt;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
@@ -10,15 +10,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.a6nimmt.logic.Player;
+import com.example.a6nimmt.menu.ChangeBackground;
 import com.example.a6nimmt.menu.NameofPlayers;
 import com.example.a6nimmt.menu.NoofPlayers;
 import com.example.a6nimmt.menu.StartPage;
-import com.example.a6nimmt.scoreboard.ScoreBoardFragment;
-
-import java.util.ArrayList;
 
 
 public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnNamesListener {
@@ -34,6 +32,8 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     private NoofPlayers numOfPlayersFrag;
 
     private MediaPlayer buttonClickSound;
+
+    private int background;
 
     public static Context appContext;
 
@@ -51,7 +51,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
             startPage = new StartPage();
             startPage.setArguments(this.getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().replace(R.id.page_content, startPage)
-                    .addToBackStack(TAG1).commit();
+                    .commit();
         }
     }
 
@@ -104,10 +104,37 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
         Intent myIntent = new Intent(this, GameActivity.class);
         myIntent.putExtra("playerNames", names);
+        myIntent.putExtra("background", background);
         startActivity(myIntent);
     }
 
     public static void setNumOfPlayersEditText(EditText numOfPlayersEditText) {
         MenuActivity.numOfPlayersEditText = numOfPlayersEditText;
+    }
+
+    public void changeBackground(View view) {
+        ChangeBackground changeBackground = new ChangeBackground();
+        changeBackground.setArguments(this.getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().replace(R.id.page_content, changeBackground)
+                .addToBackStack("back").commit();
+    }
+
+    public void backgroundChosen(View view) {
+        background = view.getId();
+        RelativeLayout menuBackground = findViewById(R.id.menu_background);
+        switch (view.getId()){
+            case  R.id.red_image:
+                menuBackground.setBackgroundResource(R.drawable.red_colored_background);
+                break;
+            case R.id.dark_image:
+                menuBackground.setBackgroundResource(R.drawable.dark_blue_background);
+                break;
+            case R.id.colorful_image:
+                menuBackground.setBackgroundResource(R.drawable.bright_colors_background);
+                break;
+            case R.id.white:
+                menuBackground.setBackgroundResource(R.drawable.light_wooden_background);
+                break;
+        }
     }
 }
