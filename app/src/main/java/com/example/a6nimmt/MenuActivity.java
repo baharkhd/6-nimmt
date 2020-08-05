@@ -27,9 +27,6 @@ import com.example.a6nimmt.menu.StartPage;
 public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnNamesListener {
 
     StartPage startPage;
-    String TAG1 = "startPage";
-    NoofPlayers noofPlayers;
-    String TAG2 = "noofPlayers";
     NameofPlayers nameofPlayers;
     String TAG3 = "nameofPlayers";
     public static int no_of_players;
@@ -136,12 +133,12 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     @Override
     public void onNamesEntered(String[] names) {
         buttonClickSound.start();
+        //super.onBackPressed();
 
         Intent myIntent = new Intent(this, GameActivity.class);
         myIntent.putExtra("playerNames", names);
         myIntent.putExtra("background", background);
         startActivity(myIntent);
-        finish();
     }
 
     public static void setNumOfPlayersEditText(EditText numOfPlayersEditText) {
