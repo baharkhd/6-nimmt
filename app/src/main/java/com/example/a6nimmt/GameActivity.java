@@ -102,8 +102,17 @@ public class GameActivity extends AppCompatActivity {
 
     public void onMenuButtonClick(View view) {
         buttonClickSound.start();
+        backToMenu();
+    }
+
+    public void onBackPressed(){
+        backToMenu();
+    }
+
+    private void backToMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void showScoreboard() {

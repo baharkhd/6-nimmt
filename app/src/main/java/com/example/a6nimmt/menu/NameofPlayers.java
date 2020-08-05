@@ -11,9 +11,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.a6nimmt.R;
@@ -49,16 +51,28 @@ public class NameofPlayers extends Fragment {
                              Bundle savedInstanceState) {
         editTexts = new EditText[noOfPlayers];
         names = new String[noOfPlayers];
+
+        LinearLayout outerLayout = new LinearLayout(getContext());
+        ScrollView scrollView = new ScrollView(getContext());
         LinearLayout linearLayout = new LinearLayout(getContext());
+
+        ScrollView.LayoutParams scrollParams = new ScrollView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        scrollView.setLayoutParams(scrollParams);
+        scrollView.setFillViewport(true);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayout.setLayoutParams(params);
-        linearLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
-        linearLayout.setHorizontalGravity(Gravity.CENTER_VERTICAL);
-
-        linearLayout.setGravity(Gravity.CENTER);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setGravity(Gravity.CENTER);
+
+        outerLayout.setLayoutParams(params);
+        outerLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+        outerLayout.setHorizontalGravity(Gravity.CENTER_VERTICAL);
+
+        outerLayout.setGravity(Gravity.CENTER);
+        outerLayout.setOrientation(LinearLayout.VERTICAL);
         for (int i = 0; i < noOfPlayers; i++) {
 
             EditText e = (EditText) inflater.inflate(R.layout.player_name_layout, container, false);
@@ -68,8 +82,10 @@ public class NameofPlayers extends Fragment {
         }
         Button ok = (Button) inflater.inflate(R.layout.ok_button, container, false);
         linearLayout.addView(ok);
+        scrollView.addView(linearLayout);
+        outerLayout.addView(scrollView);
         getNames(ok);
-        return linearLayout;
+        return outerLayout;
     }
 
     private void getNames(Button ok) {

@@ -33,10 +33,4 @@ public class StartPage extends Fragment {
         return inflater.inflate(R.layout.fragment_start_page, container, false);
     }
 
-    public void exitButton(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().finish();
-            System.exit(0);
-        }
-    }
 }

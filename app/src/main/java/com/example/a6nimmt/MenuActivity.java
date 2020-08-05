@@ -98,7 +98,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
     public void exitButton(View view) {
         buttonClickSound.start();
-        startPage.exitButton(view);
+        super.onBackPressed();
     }
 
     public void numberOfPlayers(View view) {
@@ -141,6 +141,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         myIntent.putExtra("playerNames", names);
         myIntent.putExtra("background", background);
         startActivity(myIntent);
+        finish();
     }
 
     public static void setNumOfPlayersEditText(EditText numOfPlayersEditText) {
