@@ -49,6 +49,10 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         buttonClickSound = MediaPlayer.create(this, R.raw.button_click_1);
 
 
+        SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
+        background = setting.getInt("background", R.drawable.red_colored_background);
+
+
         if (savedInstanceState == null) {
             startPage = new StartPage();
             startPage.setArguments(this.getIntent().getExtras());
@@ -74,19 +78,21 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
      @Override public void onResume(){
         super.onResume();
-        SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
-        background = setting.getInt("background", R.drawable.red_colored_background);
         background();
      }
 
     @Override public void onPause() {
         super.onPause();
+        saveBackground();
+    }
+
+    private void saveBackground() {
         SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
         SharedPreferences.Editor edit= setting.edit();
 
         edit.putInt("background", background);
         edit.apply();
-     }
+    }
 
     public void exitButton(View view) {
         buttonClickSound.start();
