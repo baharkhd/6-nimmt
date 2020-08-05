@@ -7,14 +7,17 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.a6nimmt.menu.ChangeBackground;
 import com.example.a6nimmt.menu.NameofPlayers;
 import com.example.a6nimmt.menu.NoofPlayers;
@@ -35,7 +38,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
     private MediaPlayer buttonClickSound;
 
-    private int background;
+    private int background = R.drawable.red_color;
 
     public static Context appContext;
 
@@ -50,7 +53,7 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
 
         SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
-        background = setting.getInt("background", R.drawable.red_colored_background);
+        background = setting.getInt("background", R.drawable.red_color);
 
 
         if (savedInstanceState == null) {
@@ -156,35 +159,35 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
         int viewId = view.getId();
         switch (viewId){
             case  R.id.red_image:
-                background = R.drawable.red_colored_background;
+                background = R.drawable.red_color;
                 break;
             case R.id.dark_image:
-                background = R.drawable.dark_blue_background;
+                background = R.drawable.dark_blue;
                 break;
             case R.id.colorful_image:
-                background = R.drawable.bright_colors_background;
+                background = R.drawable.bright_colors;
                 break;
             case R.id.white:
-                background = R.drawable.light_wooden_background;
+                background = R.drawable.white_wood;
                 break;
         }
         background();
     }
 
     private void background() {
-        RelativeLayout menuBackground = findViewById(R.id.menu_background);
+        ImageView imageView = findViewById(R.id.menu_background);
         switch (background){
-            case  R.drawable.red_colored_background:
-                menuBackground.setBackgroundResource(R.drawable.red_colored_background);
+            case  R.drawable.red_color:
+                Glide.with(this).load(R.drawable.red_color).centerCrop().into(imageView);
                 break;
-            case R.drawable.dark_blue_background:
-                menuBackground.setBackgroundResource(R.drawable.dark_blue_background);
+            case R.drawable.dark_blue:
+                Glide.with(this).load(R.drawable.dark_blue).centerCrop().into(imageView);
                 break;
-            case R.drawable.bright_colors_background:
-                menuBackground.setBackgroundResource(R.drawable.bright_colors_background);
+            case R.drawable.bright_colors:
+                Glide.with(this).load(R.drawable.bright_colors).centerCrop().into(imageView);
                 break;
-            case R.drawable.light_wooden_background:
-                menuBackground.setBackgroundResource(R.drawable.light_wooden_background);
+            case R.drawable.white_wood:
+                Glide.with(this).load(R.drawable.white_wood).centerCrop().into(imageView);
                 break;
         }
     }

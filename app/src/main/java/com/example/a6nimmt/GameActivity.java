@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
 import com.example.a6nimmt.logic.DataManager;
 import com.example.a6nimmt.logic.Player;
 import com.example.a6nimmt.scoreboard.ScoreBoardFragment;
@@ -148,19 +150,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setBackground(int id){
-        ConstraintLayout gameBackground = findViewById(R.id.game_background);
+        ImageView gameBackground = findViewById(R.id.game_background);
         switch (id){
-            case  R.drawable.red_colored_background:
-                gameBackground.setBackgroundResource(R.drawable.red_colored_background);
+            case  R.drawable.red_color:
+                Glide.with(this).load(R.drawable.red_color).centerCrop().into(gameBackground);
                 break;
-            case R.drawable.dark_blue_background:
-                gameBackground.setBackgroundResource(R.drawable.dark_blue_background);
+            case R.drawable.dark_blue:
+                Glide.with(this).load(R.drawable.dark_blue).centerCrop().into(gameBackground);
                 break;
-            case R.drawable.bright_colors_background:
-                gameBackground.setBackgroundResource(R.drawable.bright_colors_background);
+            case R.drawable.bright_colors:
+                Glide.with(this).load(R.drawable.bright_colors).centerCrop().into(gameBackground);
                 break;
-            case R.drawable.light_wooden_background:
-                gameBackground.setBackgroundResource(R.drawable.light_wooden_background);
+            case R.drawable.white_wood:
+                Glide.with(this).load(R.drawable.white_wood).centerCrop().into(gameBackground);
                 View view = findViewById(R.id.separator);
                 view.setVisibility(View.GONE);
                 break;
