@@ -150,16 +150,16 @@ public class GameActivity extends AppCompatActivity {
     private void setBackground(int id){
         ConstraintLayout gameBackground = findViewById(R.id.game_background);
         switch (id){
-            case  R.id.red_image:
+            case  R.drawable.red_colored_background:
                 gameBackground.setBackgroundResource(R.drawable.red_colored_background);
                 break;
-            case R.id.dark_image:
+            case R.drawable.dark_blue_background:
                 gameBackground.setBackgroundResource(R.drawable.dark_blue_background);
                 break;
-            case R.id.colorful_image:
+            case R.drawable.bright_colors_background:
                 gameBackground.setBackgroundResource(R.drawable.bright_colors_background);
                 break;
-            case R.id.white:
+            case R.drawable.light_wooden_background:
                 gameBackground.setBackgroundResource(R.drawable.light_wooden_background);
                 View view = findViewById(R.id.separator);
                 view.setVisibility(View.GONE);

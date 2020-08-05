@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/image8"
     tools:context=".menu.StartPage">
 
     <Button
@@ -17,7 +16,8 @@
         android:text="@string/chenge_background"
         android:padding="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:onClick="changeBackground"/>
+        android:onClick="changeBackground"
+        tools:ignore="OnClick" />
 
 
     <Button

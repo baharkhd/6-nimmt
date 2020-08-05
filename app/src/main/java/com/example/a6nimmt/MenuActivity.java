@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,7 +74,18 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
 
      @Override public void onResume(){
         super.onResume();
+        SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
+        background = setting.getInt("background", R.drawable.red_colored_background);
         background();
+     }
+
+    @Override public void onPause() {
+        super.onPause();
+        SharedPreferences setting = getSharedPreferences("background", MODE_PRIVATE);
+        SharedPreferences.Editor edit= setting.edit();
+
+        edit.putInt("background", background);
+        edit.apply();
      }
 
     public void exitButton(View view) {
@@ -135,23 +147,37 @@ public class MenuActivity extends AppCompatActivity implements NameofPlayers.OnN
     }
 
     public void backgroundChosen(View view) {
-        background = view.getId();
+        int viewId = view.getId();
+        switch (viewId){
+            case  R.id.red_image:
+                background = R.drawable.red_colored_background;
+                break;
+            case R.id.dark_image:
+                background = R.drawable.dark_blue_background;
+                break;
+            case R.id.colorful_image:
+                background = R.drawable.bright_colors_background;
+                break;
+            case R.id.white:
+                background = R.drawable.light_wooden_background;
+                break;
+        }
         background();
     }
 
     private void background() {
         RelativeLayout menuBackground = findViewById(R.id.menu_background);
         switch (background){
-            case  R.id.red_image:
+            case  R.drawable.red_colored_background:
                 menuBackground.setBackgroundResource(R.drawable.red_colored_background);
                 break;
-            case R.id.dark_image:
+            case R.drawable.dark_blue_background:
                 menuBackground.setBackgroundResource(R.drawable.dark_blue_background);
                 break;
-            case R.id.colorful_image:
+            case R.drawable.bright_colors_background:
                 menuBackground.setBackgroundResource(R.drawable.bright_colors_background);
                 break;
-            case R.id.white:
+            case R.drawable.light_wooden_background:
                 menuBackground.setBackgroundResource(R.drawable.light_wooden_background);
                 break;
         }
