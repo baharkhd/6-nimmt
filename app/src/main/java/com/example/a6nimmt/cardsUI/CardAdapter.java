@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.a6nimmt.GameActivity;
 import com.example.a6nimmt.R;
 import com.example.a6nimmt.logic.Card;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
     private ArrayList<Card> myCards;
+    private View v;
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
 
@@ -39,6 +41,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        v = view;
 
         return new CardViewHolder(view);
     }
@@ -56,7 +59,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Resources res = GameActivity.getGameContext().getResources();
         int resID = res.getIdentifier(cardName, "drawable", GameActivity.getGameContext().getPackageName());
         Bitmap myBitmap = ((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
-        cardImage.setImageBitmap(myBitmap);
+        Glide.with(v).load(myBitmap).into(cardImage);
+        //cardImage.setImageBitmap(myBitmap);
 
         setAnimation(holder.itemView, position);
     }
