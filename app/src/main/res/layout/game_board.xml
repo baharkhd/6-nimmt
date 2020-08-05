@@ -58,7 +58,8 @@
         app:layout_constraintEnd_toStartOf="@+id/recyclerView5"
         app:layout_constraintStart_toEndOf="@+id/recyclerView4"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/light_gray"/>
+        android:background="@drawable/custom_line"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView5"

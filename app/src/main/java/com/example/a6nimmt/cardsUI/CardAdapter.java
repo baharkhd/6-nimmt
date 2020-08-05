@@ -59,13 +59,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Resources res = GameActivity.getGameContext().getResources();
         int resID = res.getIdentifier(cardName, "drawable", GameActivity.getGameContext().getPackageName());
         Bitmap myBitmap = ((BitmapDrawable) GameActivity.getGameContext().getResources().getDrawable(resID)).getBitmap();
-        Glide.with(v).load(myBitmap).into(cardImage);
-        //cardImage.setImageBitmap(myBitmap);
+        cardImage.setImageBitmap(myBitmap);
 
-        setAnimation(holder.itemView, position);
+        setAnimation(holder.itemView);
     }
 
-    private void setAnimation(View viewToAnimate, int position) {
+    private void setAnimation(View viewToAnimate) {
 
         Animation animation = AnimationUtils.loadAnimation(GameActivity.getGameContext(), R.anim.item_animation_fall_down);
         viewToAnimate.startAnimation(animation);
