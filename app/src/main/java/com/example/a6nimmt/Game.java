@@ -130,6 +130,7 @@ public class Game {
         String currentPlayerName = "??";
         String currentPlayerScore = "??";
         canSelectCard = true;
+        String userBtnText = "Next User";
 
         if (counter == GameActivity.players.size()) {
             counter = 0;
@@ -164,17 +165,26 @@ public class Game {
                 }
             });
         } else {
+            if (counter == 0) {
+                userBtnText = "Next Round";
+            } else {
+                userBtnText = "Next Player";
+            }
+            final String finalStr = userBtnText;
             handler.post(new Runnable() {
                 @Override
                 public void run() {
                     username.setText(name);
                     score.setText(curScore);
+                    userBtn.setText(finalStr);
 
                     row5Adapter.notifyItemRangeRemoved(0, arraySize);
                     row5Adapter.notifyItemInserted(playerCards.size() - 1);
 
                 }
             });
+
+
         }
 
     }

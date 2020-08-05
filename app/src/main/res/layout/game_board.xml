@@ -96,7 +96,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/my_baby"
-        android:text="@string/next_user"
+        android:text="@string/next_round"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
